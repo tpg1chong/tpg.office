@@ -1,0 +1,188 @@
+/* https://material.io/icons/ */
+
+@font-face {
+
+  font-family: 'Material Icons';
+  src: url(../fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
+       url(../fonts/MaterialIcons-Regular.woff) format('woff'),
+       url(../fonts/MaterialIcons-Regular.ttf) format('truetype'), url('../fonts/MaterialIcons-Regular.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"],[class*=" icon-"]{font-family:"Material Icons";font-weight:normal;font-style:normal;text-decoration:inherit;-webkit-font-smoothing:antialiased;display:inline;width:auto;height:auto;line-height:normal;vertical-align:baseline;background-image:none;background-position:0% 0%;background-repeat:repeat;margin-top:0;
+  
+  text-transform: none;
+
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+[class^="icon-"]:before,[class*=" icon-"]:before{text-decoration:inherit;display:inline-block;speak:none}
+a [class^="icon-"],a [class*=" icon-"]{display:inline-block}
+
+/* -- Action -- */
+.icon-3d-rotation:before{content:"3d_rotation"}
+.icon-accessibility:before{content:"accessibility"}
+.icon-accessible:before{content:"accessible"}
+.icon-account-balance:before{content:"account_balance"}
+.icon-account-balance-wallet:before{content:"account_balance_wallet"}
+.icon-account-box:before{content:"account_box"}
+.icon-account-circle:before{content:"account_circle"}
+.icon-add-shopping-cart:before{content:"add_shopping_cart"}
+.icon-alarm:before{content:"alarm"}
+.icon-alarm-add:before{content:"alarm_add"}
+.icon-alarm-off:before{content:"alarm_off"}
+.icon-alarm-on:before{content:"alarm_on"}
+.icon-all-out:before{content:"all_out"}
+.icon-android:before{content:"android"}
+.icon-announcement:before{content:"announcement"}
+.icon-aspect-ratio:before{content:"aspect_ratio"}
+.icon-assessment:before{content:"assessment"}
+.icon-assignment:before{content:"assignment"}
+.icon-assignment-ind:before{content:"assignment_ind"}
+.icon-assignment-late:before{content:"assignment_late"}
+.icon-assignment-return:before{content:"assignment_return"}
+.icon-assignment-returned:before{content:"assignment_returned"}
+.icon-assignment-turned-in:before{content:"assignment_turned_in"}
+.icon-autore:before{content:"autore"}
+.icon-backup:before{content:"backup"}
+.icon-book:before{content:"book"}
+.icon-bookmark:before{content:"bookmark"}
+.icon-bookmark-border:before{content:"bookmark_border"}
+.icon-bug-report:before{content:"bug_report"}
+.icon-build:before{content:"build"}
+.icon-cached:before{content:"cached"}
+.icon-camera-enhance:before{content:"camera_enhance"}
+.icon-card-giftcard:before{content:"card_giftcard"}
+.icon-card-membership:before{content:"card_membership"}
+.icon-card-travel:before{content:"card_travel"}
+.icon-change-history:before{content:"change_history"}
+.icon-check-circle:before{content:"check_circle"}
+.icon-chrome-reader-mode:before{content:"chrome_reader_mode"}
+.icon-class:before{content:"class"}
+.icon-code:before{content:"code"}
+.icon-compare-arrows:before{content:"compare_arrows"}
+.icon-copyright:before{content:"copyright"}
+.icon-credit-card:before{content:"credit_card"}
+.icon-dashboard:before{content:"dashboard"}
+.icon-date-range:before{content:"date_range"}
+.icon-delete:before{content:"delete"}
+.icon-delete-forever:before{content:"delete_forever"}
+.icon-description:before{content:"description"}
+.icon-dns:before{content:"dns"}
+.icon-done:before{content:"done"}
+.icon-done-all:before{content:"done_all"}
+.icon-donut-large:before{content:"donut_large"}
+.icon-donut-small:before{content:"donut_small"}
+.icon-eject:before{content:"eject"}
+.icon-euro-symbol:before{content:"euro_symbol"}
+.icon-event:before{content:"event"}
+.icon-event-seat:before{content:"event_seat"}
+.icon-exit-to-app:before{content:"exit_to_app"}
+.icon-explore:before{content:"explore"}
+.icon-extension:before{content:"extension"}
+.icon-face:before{content:"face"}
+.icon-favorite:before{content:"favorite"}
+.icon-favorite-border:before{content:"favorite_border"}
+.icon-feedback:before{content:"feedback"}
+.icon-find-in-page:before{content:"find_in_page"}
+.icon-find-replace:before{content:"find_replace"}
+.icon-fingerprint:before{content:"fingerprint"}
+.icon-flight-land:before{content:"flight_land"}
+.icon-flight-takeoff:before{content:"flight_takeoff"}
+.icon-flip-to-back:before{content:"flip_to_back"}
+.icon-flip-to-front:before{content:"flip_to_front"}
+.icon-g-translate:before{content:"g_translate"}
+.icon-gavel:before{content:"gavel"}
+.icon-get-app:before{content:"get_app"}
+.icon-gif:before{content:"gif"}
+.icon-grade:before{content:"grade"}
+.icon-group-work:before{content:"group_work"}
+.icon-help:before{content:"help"}
+.icon-help-outline:before{content:"help_outline"}
+.icon-highlight-off:before{content:"highlight_off"}
+.icon-history:before{content:"history"}
+.icon-home:before{content:"home"}
+.icon-hourglass-empty:before{content:"hourglass_empty"}
+.icon-hourglass-full:before{content:"hourglass_full"}
+.icon-http:before{content:"http"}
+.icon-https:before{content:"https"}
+.icon-important-devices:before{content:"important_devices"}
+.icon-info:before{content:"info"}
+.icon-info-outline:before{content:"info_outline"}
+.icon-input:before{content:"input"}
+.icon-invert-colors:before{content:"invert_colors"}
+.icon-label:before{content:"label"}
+.icon-label-outline:before{content:"label_outline"}
+.icon-language:before{content:"language"}
+.icon-launch:before{content:"launch"}
+.icon-lightbulb-outline:before{content:"lightbulb_outline"}
+.icon-line-style:before{content:"line_style"}
+.icon-line-weight:before{content:"line_weight"}
+.icon-list:before{content:"list"}
+.icon-lock:before{content:"lock"}
+.icon-lock-open:before{content:"lock_open"}
+.icon-lock-outline:before{content:"lock_outline"}
+.icon-loyalty:before{content:"loyalty"}
+.icon-markunread-mailbox:before{content:"markunread_mailbox"}
+.icon-motorcycle:before{content:"motorcycle"}
+.icon-note-add:before{content:"note_add"}
+.icon-offline-pin:before{content:"offline_pin"}
+.icon-opacity:before{content:"opacity"}
+.icon-open-in-browser:before{content:"open_in_browser"}
+.icon-open-in-:before{content:"open_in_"}
+.icon-open-with:before{content:"open_with"}
+.icon-pageview:before{content:"pageview"}
+.icon-pan-tool:before{content:"pan_tool"}
+.icon-payment:before{content:"payment"}
+.icon-perm-camera-mic:before{content:"perm_camera_mic"}
+.icon-perm-contact-calendar:before{content:"perm_contact_calendar"}
+.icon-perm-data-setting:before{content:"perm_data_setting"}
+.icon-perm-device-information:before{content:"perm_device_information"}
+.icon-perm-identity:before{content:"perm_identity"}
+.icon-perm-media:before{content:"perm_media"}
+.icon-perm-phone-msg:before{content:"perm_phone_msg"}
+.icon-perm-scan-wifi:before{content:"perm_scan_wifi"}
+.icon-pets:before{content:"pets"}
+.icon-picture-in-picture:before{content:"picture_in_picture"}
+.icon-picture-in-picture-alt:before{content:"picture_in_picture_alt"}
+.icon-play-for-work:before{content:"play_for_work"}
+.icon-polymer:before{content:"polymer"}
+.icon-power-settings-:before{content:"power_settings_"}
+.icon-pregnant-woman:before{content:"pregnant_woman"}
+.icon-print:before{content:"print"}
+.icon-query-builder:before{content:"query_builder"}
+.icon-question-answer:before{content:"question_answer"}
+.icon-receipt:before{content:"receipt"}
+.icon-record-voice-over:before{content:"record_voice_over"}
+.icon-redeem:before{content:"redeem"}
+.icon-remove-shopping-cart:before{content:"remove_shopping_cart"}
+.icon-reorder:before{content:"reorder"}
+.icon-report-problem:before{content:"report_problem"}
+.icon-restore:before{content:"restore"}
+.icon-restore-page:before{content:"restore_page"}
+.icon-room:before{content:"room"}
+.icon-rounded-corner:before{content:"rounded_corner"}
+.icon-rowing:before{content:"rowing"}
+.icon-schedule:before{content:"schedule"}
+
+
+.icon-user:before{content:"account_box"}
+.icon-key:before{content:"lock_outline"}

@@ -1,0 +1,11 @@
+<?php
+
+
+// $selector['display'] = '';
+require 'init.php';
+require 'tablelists.php';
+echo json_encode( array(
+	'settings' => $this->results,
+	'body' => $table,
+	// 'selector' => $selector
+));

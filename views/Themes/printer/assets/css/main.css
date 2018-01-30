@@ -1,0 +1,56 @@
+/*          
+		  .o88
+          "888
+ .oooo.    888  .oo.    ..o88.     ooo. .oo.    .oooo`88
+d88' `8b   88bP"Y88b   888P"Y88b  "888P"Y88b   888' `88b 
+888        88b   888   888   888   888   888   888   888
+888. .88   888   888   888   888   888   888   888. .880
+ 8`bo8P'  o888o o888o   8`bod8P'  o888o o888o   .oooo88o
+ 												     088`
+ 											        .o88
+*/
+*,*:before,*:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+html,body,div,section,header,footer,article,hr,fieldset,figure{display:block;margin:0;padding:0;border:0;background:none;outline:none}
+body{
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	color: #000;
+}
+h1,h2,h3,h4,h5,h6,p{display:block;margin:0;padding:0;border:0;font-weight:400}
+dl,dt,dd,ul,ol,li{list-style:none;display:block;margin:0;padding:0;border:0;background:none;outline:none}
+
+/**/
+/* sticker_A4-2x6 */
+/**/
+ul.sticker_A4-2x6{width: 644.72px;margin: 5px auto 0}
+ul.sticker_A4-2x6>li{display: inline-block;vertical-align: top;width: 50%}
+ul.sticker_A4-2x6>li .outer{width: 302.36px;height: 173.85px;position:relative;margin:6px 5px;}
+ul.sticker_A4-2x6>li .inner{
+	padding: 20px;
+	overflow: hidden;
+	height: 170px;
+	vertical-align: middle;
+}
+ul.sticker_A4-2x6>li h1{font-size: 15px;font-weight: bold;}
+ul.sticker_A4-2x6>li h2{margin-top:5px;font-size: 14px}
+ul.sticker_A4-2x6>li h3{font-size: 12px;margin-top: 3px;color: #666}
+
+ul.sticker_A4-2x6>li:nth-child(odd) .outer{
+    margin-right: 10px
+}
+
+ul.sticker_A4-2x6>li:nth-child(even) .outer{
+    margin-left: 15px
+}
+
+ul.sticker_A4-2x6>li .inner {
+    display: table-cell;
+    vertical-align: middle;
+}
+ul.sticker_A4-2x6>li .box{
+	display: inline-block;
+	vertical-align: middle;
+	padding-top: 10px;
+	max-height: 115px;
+    overflow: hidden;
+}
