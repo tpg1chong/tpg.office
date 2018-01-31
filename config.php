@@ -3,7 +3,20 @@
 date_default_timezone_set("Asia/Bangkok");
 
 // Always provide a TRAILING SLASH (/) AFTER A PATH
-define('URL', 'http://localhost/tpg.office/');
+function siteURL($path='')
+{
+	$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+	$domainName = $_SERVER['HTTP_HOST'].'/';
+
+	if( !empty($path) ){
+		$path = trim($path, '/') . '/';
+	}
+
+	return $protocol.$domainName.$path;
+}
+
+// Always provide a TRAILING SLASH (/) AFTER A PATH
+define('URL', siteURL('tpg.office'));
 
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
