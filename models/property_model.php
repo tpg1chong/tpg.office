@@ -696,6 +696,7 @@ class Property_Model extends Model
         return $this->db->count('property_type', "`type_name`=:name", array(':name'=>'$text'));
     }
 
+
     /**/
     /* Near Type */
     /**/
@@ -736,12 +737,14 @@ class Property_Model extends Model
     /* Near */
     /**/
     private $selectNear = "
-        near_id AS id,
-        near_type_id AS type_id,
-        near_name AS name,
-        near_keyword AS keyword,
-        type_name,
-        type_keyword
+          near_id AS id
+        , near_name AS name
+        , near_keyword AS keyword
+        , near_active AS active
+        
+        , near_type_id AS type_id
+        , type_name
+        , type_keyword
     ";
     public function near(){
         return $this->db->select("SELECT {$this->selectNear} FROM property_near LEFT JOIN property_near_type ON property_near.near_type_id = property_near_type.type_id ORDER BY near_id ASC");

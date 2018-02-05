@@ -796,7 +796,11 @@ a.btn-edit:hover span {
 .form-profile .inputtext {
     background-color: #fff
 }
-
+.form-reset-password #password_new_fieldset{
+    float: left;
+    width: 48%;
+    margin-right: 10px;
+}
 .control-group select.labelselect {
     border-width: 0;
     width: auto;

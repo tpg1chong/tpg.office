@@ -7,7 +7,11 @@ class Building extends Controller {
 	}
 
 	public function index(){
-		$this->error();
+		
+        $this->view->setData('type', $this->model->query('property')->type() );
+        $this->view->setData('zone', $this->model->query('property')->zone() );
+
+        $this->view->render('building/forum/display');
 	}
 
 	public function add(){

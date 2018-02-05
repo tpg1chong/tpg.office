@@ -15,6 +15,7 @@ if( !empty($this->permit['business']['view'] ) ){
 $sub = array();
 $sub[] = array('text'=> Translate::Menu('Type'),'key'=>'type','url'=>$this->pageURL.'property/type');
 $sub[] = array('text'=> Translate::Menu('Zone'),'key'=>'zone','url'=>$this->pageURL.'property/zone');
+$sub[] = array('text'=> Translate::Menu('Near Transport'),'key'=>'near','url'=>$this->pageURL.'property/near');
 foreach ($sub as $key => $value) {
 	if( empty($this->permit[$value['key']]['view']) ) unset($sub[$key]);
 }

@@ -8,7 +8,7 @@ $form = $f->create()
 	->addClass('form-insert clearfix')
 
 	->field("password_auto")
-	->text('<label class="checkbox"><input type="checkbox" name="password_auto" id="password_auto">สร้างรหัสผ่านอัตโนมัติ</label>')
+	->text('<label class="checkbox"><input type="checkbox" name="password_auto" id="password_auto"><span class="pls">'.Translate::Val('Auto-generate password').'</span></label>')
 
 	->field("password_new")
 		->label($this->lang->translate('New Password'))
@@ -32,11 +32,11 @@ $form = $f->create()
 
 $arr['hiddenInput'][] = array('name'=>'id', 'value'=> $this->item['id']);
 $arr['body'] = $form->html();
-$arr['title'] = 'รีเซ็ตรหัสผ่าน';	
+$arr['title'] = Translate::Val('Reset password');	
 
 $arr['form'] = '<form class="form-reset-password" action="'.URL.'accounts/change_password"></form>';
-$arr['bottom_msg'] = '<a href="#" class="btn btn-cancel" role="dialog-close"><span class="btn-text">'.$this->lang->translate('Cancel').'</span></a>';
-$arr['button'] = '<button type="submit" class="btn btn-blue btn-submit"><span class="btn-text">'.$this->lang->translate('Save').'</span></button>';
+$arr['bottom_msg'] = '<a href="#" class="btn btn-cancel" role="dialog-close"><span class="btn-text">'.Translate::Val('Cancel').'</span></a>';
+$arr['button'] = '<button type="submit" class="btn btn-blue btn-submit"><span class="btn-text">'.Translate::Val('Save').'</span></button>';
 
 // $arr['width'] = 330;
 echo json_encode($arr);

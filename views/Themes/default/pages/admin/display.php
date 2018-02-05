@@ -1,4 +1,4 @@
-<?php require_once "inc/init.php"; ?>
+<?php require_once "init.php"; ?>
 
 <div id="mainContainer" class="Setting clearfix" data-plugins="main">
 

@@ -3,32 +3,22 @@
 date_default_timezone_set("Asia/Bangkok");
 
 // Always provide a TRAILING SLASH (/) AFTER A PATH
-function siteURL($path='')
-{
-	$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-	$domainName = $_SERVER['HTTP_HOST'].'/';
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$pathName = 'tpg.office';
+define('URL', $protocol.'://'.$_SERVER['HTTP_HOST'].'/'.$pathName.'/');
 
-	if( !empty($path) ){
-		$path = trim($path, '/') . '/';
-	}
-
-	return $protocol.$domainName.$path;
-}
-
-// Always provide a TRAILING SLASH (/) AFTER A PATH
-define('URL', siteURL('tpg.office'));
-
+// Set DATABASE
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'tpg');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
+// Set PATH
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__FILE__));
 define('WWW_LIBS', ROOT . DS . "libs" . DS);
 define('WWW_APPS', ROOT . DS . "apps" . DS);
-
 define('WWW_DOCS', ROOT . DS . "public". DS. 'docs' . DS);
 define('WWW_VIEW', ROOT . DS . 'views' . DS);
 define('WWW_IMAGES', ROOT . DS . 'public' . DS. 'images' . DS );
