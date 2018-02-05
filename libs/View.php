@@ -23,7 +23,7 @@ class View {
 
     function __construct() {
 
-        $this->fn = new _function();
+        $this->fn = new Fn();
         
         $this->lang = new Langs();
         $this->elem('html')->attr('lang', $this->lang->getCode() );

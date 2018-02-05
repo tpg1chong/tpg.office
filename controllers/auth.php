@@ -45,7 +45,6 @@ class Auth extends Controller {
 		/*$client->setAuthConfig( WWW_VENDORS. 'google_apis/client_secret.json');
 		$client->setAccessType("offline");
 		$client->setIncludeGrantedScopes(true);*/
-
 		// $client->revokeToken(); ยกเลิกโทเคน
 
 		try{
@@ -58,7 +57,7 @@ class Auth extends Controller {
 
 			if ( isset($_SESSION['access_token']) ){
 
-				$_SESSION['access_token']['expires_in'] = 3600*24;
+				// $_SESSION['access_token']['expires_in'] = 3600*24;
 				$client->setAccessToken($_SESSION['access_token']);
 			}
 
@@ -67,28 +66,28 @@ class Auth extends Controller {
 	  			$plus = new Google_Service_Plus($client);
 				$userProfile = $plus->people->get('me');
 
-
 				$emails = $userProfile->getEmails();
 				$name = $userProfile->getName();
 				$email = $emails[0]['value'];
-
+				// print_r($userProfile); die;
 
 				$userid = $this->model->query('users')->loginWithGoogle( $userProfile->id, $email );
 				if( !empty($userid) ){
 					
-					$google_redirect_uri = Session::set( 'google_redirect_uri' ); 
-					$google_redirect_uri = isset($google_redirect_uri) ? $google_redirect_uri: URL;
+					$redirect_uri = Session::get( 'login_redirect_uri' );
+					$redirect_uri = isset($redirect_uri) ? $redirect_uri: URL;
 					Cookie::set( COOKIE_KEY_USER, $userid, time() + (3600*24));
-					header("Location: ". filter_var($google_redirect_uri, FILTER_SANITIZE_URL) ); die;
+					header("Location: ". filter_var($redirect_uri, FILTER_SANITIZE_URL) ); die;
 				}				
 				// print "Your Profile: <pre>" . print_r($userProfile, true) . "</pre>";
 	  		}
 
   		}catch (Exception $e) {
+  			$arr['error'] = '450';
   			$arr['message'] = '';
   		}
 
-  		$redirect_uri = URL.'login?error=login_with_google';
+  		$redirect_uri = URL.'login?error=login_with_google&connection';
   		header("Location: ". filter_var($redirect_uri, FILTER_SANITIZE_URL));		
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Text_Fn extends _function {
+class Text_Fn extends Fn {
     
     public function example($text){
         return "example:".$text;

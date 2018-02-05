@@ -1,10 +1,8 @@
 <?php
 
-class _function {
+class Fn {
 
-    function __construct() {
-        $this->lang = new Langs();
-    }
+    function __construct() { }
 
     private $_q = array();
     public function q( $query ){

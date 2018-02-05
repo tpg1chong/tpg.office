@@ -5,9 +5,8 @@ class Controller {
     public $format = "html";
     public $pathName = "";
     function __construct() {
-        
-        $this->fn = new _function();
-        $this->format = $this->get_format_json() ? "json":"html";
+        $this->fn = new Fn();
+        $this->format = $this->_httprequestFormat();
         $this->lang = new Langs();
 
         // View
@@ -17,22 +16,15 @@ class Controller {
         $this->view->setPage('locale', $this->lang->getCode() );
     }
  
-    private function get_format_json() {
-        $_q = false;
+    private function _httprequestFormat() {
+        $_q = 'html';
         if( isset($_SERVER['HTTP_X_REQUESTED_WITH']) ){
             if( strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' ){
-                $_q = true;
+                $_q = 'json';
             }
         }
 
         return $_q;
-    }
-    
-    public function verifyWWW() {
-
-        if (strpos($_SERVER['SERVER_NAME'],'www') !== false) {
-            header("Location:". URL. ltrim($_SERVER['REQUEST_URI'], '/'));
-        }
     }
 
     /**
@@ -57,14 +49,17 @@ class Controller {
         
         $this->system = $this->model->query('system')->get();
         if( !empty($this->system) ){
-            $this->setSystem();
+            $this->setupSystem();
             $this->view->setData('system', $this->system);
         }
 
+        $this->_modifyPage();
         $this->handleLogin();
-        
     }
-    public function setPagePermit($value='') {
+
+
+    // Permit Page
+    public function setPagePermit() {
 
         $permit = $this->model->query('system')->permit( !empty($this->me['access']) ? $this->me['access']:array() );
 
@@ -79,11 +74,14 @@ class Controller {
 
         }
 
+        // print_r($permit); die;
+        
         $this->permit = $permit;
         $this->view->setData('permit', $this->permit);
     }
 
-    public function setSystem(){
+    // set Data Default Page
+    public function setupSystem(){
 
         $url = isset($_GET['url']) ?$_GET['url']:'';
         $title = '';
@@ -129,16 +127,19 @@ class Controller {
 
             $this->view->setPage('description',  $description );
         }  
-	
-		if( empty($this->system['image']) ){
-			$this->view->setPage( 'image', IMAGES.'logo/25x25.png' );
-		}
+    
+        
+        $this->view->setPage('logo', IMAGES.'logo/top-logo.png' );
+        if( empty($this->system['image']) ){
+            $this->view->setPage( 'image', IMAGES.'logo/top-logo.png' );
+        }
 
         if( !empty($this->system['theme']) ){
             $this->view->setPage('theme',  $this->system['theme'] );
         }
     }
 
+    // return FORM Error
     protected function _getError($err) {
         $err = explode(',', rtrim($err, ','));
 
@@ -153,9 +154,19 @@ class Controller {
 
     public $me = null;
     public function handleLogin(){
+        Session::init();
 
         if ( Cookie::get( COOKIE_KEY_USER ) ) {
             $me = $this->model->query('users')->get( Cookie::get( COOKIE_KEY_USER ) );
+        }
+
+        // print_r($_SERVER); die;
+
+        // ทดสอบระบบ Demo // Auto Login
+        if( empty($me) && $this->format=='html' && $this->pathName!='auth' && !isset($_REQUEST['connection']) ){
+
+            $this->_autoLoginWithGoogle();
+            die;
         }
 
         if( !empty($me) ){
@@ -177,30 +188,43 @@ class Controller {
 
             // 
             $this->setPagePermit();
-            $this->_modify();
-        }else if( $this->pathName != 'auth' ){
+        }else if( $this->pathName!='auth' ) {
             $this->login();
         }
     }
+
+
+    // Page Error
     public function error(){
-        
         if( !$this->model ){
             $this->loadModel('error');
         }
 
-        $this->view->setPage('title', $this->lang->getCode()=='th'?'ไม่พบเพจ': 'Page not found');
-        $this->view->elem('body')->addClass('page-errors');
-        $this->view->render( 'error' );
+        if( $this->format=='json' ){
+
+            echo json_encode(array(
+                'error' => 404,
+                'message' => 'Page not found'
+            ));
+        }
+        else{
+            $this->view->setPage('title', $this->lang->getCode()=='th'?'ไม่พบเพจ': 'Page not found');
+            $this->view->elem('body')->addClass('page-errors');
+            $this->view->render( 'error' );
+        }
+
+        
         exit;
     }
 
+    // Page Login
     public function login() {
 
         Session::init();
         $attempt = Session::get('login_attempt');
         if( isset($attempt) && $attempt>=2 ){
-            /*$this->view->setData('captcha', true);
-            $this->view->js('https://www.google.com/recaptcha/api.js', true);*/
+            $this->view->setData('captcha', true);
+            $this->view->js('https://www.google.com/recaptcha/api.js', true);
         }
         elseif( empty($attempt) ){
             $attempt = 0;
@@ -209,11 +233,11 @@ class Controller {
 
         $login_mode = isset($_REQUEST['login_mode']) ? $_REQUEST['login_mode']: 'default';
 
-        if( empty($_REQUEST['g-recaptcha-response']) && $attempt>2 && $login_mode=='default' ){
-            // $error['captcha'] = 'คุณป้อนรหัสไม่ถูกต้อง?';
+        if( empty($_REQUEST['g-recaptcha-response']) && $attempt>2 ){
+            $error['captcha'] = 'คุณป้อนรหัสไม่ถูกต้อง?';
         }
-
         if( !empty($_POST) && empty($error) ){
+
             
             try {
                 $form = new Form();
@@ -257,6 +281,7 @@ class Controller {
                 $error = $this->_getError( $e->getMessage() );
             }
 
+            
         }
 
         if(!empty($error)){
@@ -272,9 +297,8 @@ class Controller {
         $redirect = URL;
         $next = isset($_REQUEST['next']) ? $_REQUEST['next']: '';
         
-        if( !in_array($this->view->getPage('theme'), array('default', 'crm')) ){
-            $next = URL.$this->view->getPage('theme');
-            $redirect = $next;
+        if( in_array($this->view->getPage('theme'), array('manage')) ){
+            $redirect = URL.$this->view->getPage('theme');
         }
         
         if( !empty( $next) ){
@@ -288,19 +312,15 @@ class Controller {
         $this->view->setPage('theme_options', array(
             'has_topbar' => false,
             'has_footer' => false,
+            'has_menu' => false,
         ));
 
-        /*if( isset($_REQUEST['login_mode']) ){
-            Session::set('login_mode', $_REQUEST['login_mode']);
-        }*/
-
-        $mode = Session::get('login_mode');
-        if( empty($mode) ) $mode = 'default';
-        $this->view->render( $mode );
+        $this->view->render( 'default' );
         exit;
     }
 
-    public function _modify() {
+    /* -- _modifyPage --*/
+    public function _modifyPage() {
         
         $options = array(
             'has_topbar' => false,
@@ -326,13 +346,46 @@ class Controller {
     }
 
 
+
     public function getCalendarId() {
         $lang = $this->lang->getCode();
 
         $calendarId = array();
         array_push($calendarId, "{$lang}.th#holiday@group.v.calendar.google.com");
-        array_push($calendarId, $this->me['user_email']);
+        // array_push($calendarId, $this->me['user_email']);
+        array_push($calendarId, 'thaipropertyguide.com_i43s582pm9ttup8lcad2la4o2c@group.calendar.google.com');
+        array_push($calendarId, 'tol10dbd2nbbks25qe5e4p3qn0@group.calendar.google.com');
 
         return $calendarId;
+    }
+
+    public function _autoLoginWithGoogle( $redirect = null)
+    {
+        
+        if( $redirect==null ){
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https" : "http";
+            $redirect = isset($_REQUEST['next']) ? $_REQUEST['next']: $protocol.'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        }
+
+        if( !empty($redirect) ){
+            Session::set('login_redirect_uri', $redirect);
+        }
+
+        $google = new Google();
+        $client = $google->client;
+
+        if( !empty($this->me['user_email']) ){
+            $client->setLoginHint($this->me['user_email']);
+        }
+
+        $client->isAccessTokenExpired(true);
+        $client->getRefreshToken();
+        $client->setRedirectUri( URL . 'auth/google_oauth2/');
+
+        $client->setScopes( $google->_scopes );
+        $client->isAccessTokenExpired(true);
+
+        $getAuthUrl = $client->createAuthUrl();
+        header('Location: ' . filter_var($getAuthUrl, FILTER_SANITIZE_URL));
     }
 }

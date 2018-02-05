@@ -27,7 +27,7 @@ echo '<ul class="navigation-list">'.
 
 	'<li class="clearfix">'.
 		'<div class="navigation-main-footer-cogs">'.
-			'<a data-plugins="dialog" href="'.URL.'logout/admin"><i class="icon-power-off"></i><span class="visuallyhidden">Log Out</span></a>'.
+			'<a data-plugins="dialog" href="'.URL.'accounts/logout/"><i class="icon-power-off"></i><span class="visuallyhidden">Log Out</span></a>'.
 			// '<a href="'.URL.'logout/admin"><i class="icon-cog"></i><span class="visuallyhidden">Settings</span></a>'.
 		'</div>'.
 		'<div class="navigation-brand-logo clearfix">'.$image.( !empty( $this->system['title'] ) ? $this->system['title']:'' ).'</div>'.

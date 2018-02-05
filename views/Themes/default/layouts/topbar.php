@@ -84,7 +84,7 @@ $pageNavR .= '<li class="uiToggle headerAvatarWrap">'.
             
             '<li class="menuItem"><a class="itemAnchor" href="'.URL.'settings"><span class="itemLabel">'.$this->lang->translate('menu','Settings').'</span></a></li>'.
 
-            '<li class="menuItem"><a class="itemAnchor" data-plugins="dialog" href="'.URL.'logout/admin"><span class="itemLabel">'.$this->lang->translate('menu','Log Out').'</span></a></li>'.
+            '<li class="menuItem"><a class="itemAnchor" data-plugins="dialog" href="'.URL.'accounts/logout/"><span class="itemLabel">'.$this->lang->translate('menu','Log Out').'</span></a></li>'.
         '</ul></div>'.
 
 '</li>';

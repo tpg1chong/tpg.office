@@ -3,7 +3,7 @@
 date_default_timezone_set("Asia/Bangkok");
 
 // Always provide a TRAILING SLASH (/) AFTER A PATH
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https" : "http";
 $pathName = 'tpg.office';
 define('URL', $protocol.'://'.$_SERVER['HTTP_HOST'].'/'.$pathName.'/');
 
@@ -38,7 +38,7 @@ define('AVATAR', URL . 'public/images/avatar/');
 define('UPLOADS', URL . "public/uploads/");
 define('SOUNDS', URL . "public/sounds/");
 
-define('LANG', 'th');
+define('LANG_DEFAULT', 'th');
 define('COOKIE_KEY_USER', 'u_id');
 
 // The sitewide hashkey, do not change this because its used for passwords!

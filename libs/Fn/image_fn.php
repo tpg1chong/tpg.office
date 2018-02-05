@@ -1,6 +1,6 @@
 <?php
 
-class Image_Fn extends _function
+class Image_Fn extends Fn
 {
 
 	// Import image

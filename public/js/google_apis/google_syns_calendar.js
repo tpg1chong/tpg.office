@@ -17,6 +17,7 @@ var googleSynsCalendarOptions = {
     ],
 };
 
+
 var GoogleSynsCalendar = {
 	render: function (options) {
 		var self = this;
@@ -27,7 +28,7 @@ var GoogleSynsCalendar = {
 		self.options = $.extend( {}, googleSynsCalendarOptions, options );
 
 		gapi.load("client:auth", function() {
-	   	 	self.checkAuth();
+	   	 	self. ();
 	  	});
 
         // self.handleClientLoad();
@@ -70,7 +71,6 @@ var GoogleSynsCalendar = {
         }).then( function ( res ) {
             self.handleAuthResult( res );
         });
-
     },
 
     handleAuthResult: function (authResult) {
@@ -213,8 +213,6 @@ var GoogleSynsCalendar = {
             console.error("Execute error", error);
         });
     },
-
-
     // Events
     insertEvent: function () {
         var self = this;

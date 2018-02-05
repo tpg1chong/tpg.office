@@ -1,6 +1,6 @@
 <?php
 
-class File_Fn extends _function
+class File_Fn extends Fn
 {
 
 	public function type($type){

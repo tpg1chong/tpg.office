@@ -184,4 +184,33 @@ class Accounts extends Controller {
             $this->view->render("change_enabled");
         }
     }
+
+
+
+    public function logout() {
+        
+        $url = URL;
+        $this->view->setPage('theme', 'login');
+
+        if( $this->format == 'json' ){
+            $this->view->render('confirm_logout');
+            exit;
+        }
+
+        if( empty($this->me) ){
+            header('location:' . $url );
+        }
+
+        Session::init();
+        Session::destroy();
+
+        $url = !empty($_REQUEST['next'])
+            ? $_REQUEST['next']
+            : $url;
+
+        Cookie::clear( COOKIE_KEY_USER );
+        Cookie::clear( 'login_role' );
+        
+        header('location:' . $url);
+    }
 }

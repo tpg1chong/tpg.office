@@ -3,6 +3,8 @@
 class gCalendar extends Google {
 	public $_error = array();
 
+
+    private $_timeZone = 'Asia/Bangkok';
 	public function __construct() {
 		parent::__construct();
 
@@ -58,7 +60,7 @@ class gCalendar extends Google {
             'showDeleted'=> false,
             'singleEvents'=> true,
             'orderBy'=> 'startTime',
-            'timeZone' => 'Asia/Bangkok',
+            'timeZone' => $this->_timeZone,
         );
 
         $arr = array(); $list = array();
@@ -86,7 +88,9 @@ class gCalendar extends Google {
                 $arr['items'] = $list;
 
             } catch (Exception $e) {
-            	$arr['error'] = 404;
+
+                // return $e->getMessage();
+            	$arr['error'] = 400;
                 $arr['message'] = 'api disconnect';
             }
 
@@ -187,37 +191,169 @@ class gCalendar extends Google {
         $this->_colorsEvent = $a;
     }
     
-    public function insertEvents( $options=array() ) {
+    public function getEvent($calendarId, $eventId)
+    {
         Session::init();
-
-        $options = array_merge( array(
-            'title' => '',
-            'description' => '',
-            'start' => isset($_REQUEST['start']) ? $_REQUEST['start']: date('Y-m-01'),
-            'end' => isset($_REQUEST['end']) ? $_REQUEST['end']: date('Y-m-t'),
-            'calendarId' => 'primary',
-        ), $options );
 
         if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
 
             $this->client->setAccessToken($_SESSION['access_token']);
             $service = new Google_Service_Calendar($this->client);
 
-            $event = new Google_Service_Calendar_Event([
-                'summary' => $options['title'],
-                'description' => $options['description'],
-                'start' => ['dateTime' => $options['start']],
-                'end' => ['dateTime' => $options['end']],
-                'reminders' => ['useDefault' => true],
-            ]);
-            $results = $service->events->insert($options['calendarId'], $event);
-
-            if (!$results) {
-                return response()->json(['status' => 'error', 'message' => 'Something went wrong']);
+            try {
+                $event = $service->events->get($calendarId, $eventId);
+                return $event;
+            } catch (Exception $e) {
+                return $e->getMessage();
             }
-            return response()->json(['status' => 'success', 'message' => 'Event Created']);
-        } else {
-            return redirect()->route('oauthCallback');
         }
+        else{
+            return ['error' => 404];
+        }        
+    }
+
+    public function insertEvent( $options=array() ) {
+        Session::init();
+
+        $options = array_merge( array(
+            'title' => '',
+            'location' => '',
+            'description' => '',
+            'start' => isset($_REQUEST['start']) ? $_REQUEST['start']: date('Y-m-d'),
+            'end' => isset($_REQUEST['end']) ? $_REQUEST['end']: date('Y-m-d'),
+
+            'calendarId' => 'primary',
+            'timeZone' => $this->_timeZone,
+        ), $options );
+
+
+        if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+
+            $this->client->setAccessToken($_SESSION['access_token']);
+            $service = new Google_Service_Calendar($this->client);
+
+            $event = new Google_Service_Calendar_Event( array( 
+                'summary' => $options['title'],
+                'location' => $options['location'],
+                'description' => $options['description'],
+                'start' => array(
+                    'date' => date('Y-m-d', strtotime($options['start'])),
+                    // 'dateTime' => date('c', strtotime($options['start'])),
+                    'timeZone' => $options['timeZone'],
+                ),
+                'end' => array(
+                    'date' => date('Y-m-d', strtotime($options['end'])),
+                    // 'dateTime' => date('c', strtotime($options['end'])),
+                    'timeZone' => $options['timeZone'],
+                ),
+
+                'reminders' => array(
+                    'useDefault' => false,
+                ),
+            ) );
+
+            // $event = new Google_Service_Calendar_Event([
+            //     'summary' => $options['title'],
+            //     // 'location' => isset($options['location']) ? $options['location']: '',
+            //     'description' => $options['description'],
+            //     'start' => [
+            //         'dateTime' => $options['start'],
+            //         'timeZone' => $options['timeZone'],
+            //     ],
+            //     'end' => [
+            //         'dateTime' => $options['end'],
+            //         'timeZone' => $options['timeZone'],
+            //     ],
+            //     'recurrence' => array(
+            //         'RRULE:FREQ=DAILY;COUNT=2' เกิดซ้ไ
+            //     ),
+
+            //     // 
+            //     /*'attendees' => array(
+            //         array('email' => 'lpage@example.com'),
+            //         array('email' => 'sbrin@example.com'),
+            //     ),*/
+
+            //     // การแจ้งเตือน
+            //     'reminders' => [
+            //         'useDefault' => true, // true | false
+            //         /*'overrides' => [
+            //             ['method' => 'email', 'minutes' => 24 * 60],
+            //             ['method' => 'popup', 'minutes' => 10],
+            //         ]*/
+            //     ],
+            // ]);
+            try {
+                $results = $service->events->insert($options['calendarId'], $event);
+            } catch (Exception $e) {
+                return $e->getMessage();
+            }
+
+            
+
+            if ( empty($results) ) {
+                return ['status' => 'error', 'message' => 'Something went wrong'];
+                // return response()->json(['status' => 'error', 'message' => 'Something went wrong']);
+            }
+
+            return ['status' => 'success', 'message' => 'Event Created'];
+        } else {
+
+            return ['error' => 404];
+            // echo 'oauthCallback';
+
+            // return redirect()->route('oauthCallback');
+        }
+    }
+
+    public function updateEvent($calendarId, $eventId, $dataPost=array() )
+    {
+        Session::init();
+
+        if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+
+            $this->client->setAccessToken($_SESSION['access_token']);
+            $service = new Google_Service_Calendar($this->client);
+
+            try {
+
+                $event = $service->events->get($calendarId, $eventId);
+
+                if( !empty($dataPost['title']) ){
+                    $event->setSummary( $dataPost['title'] );
+                }
+
+                $updatedEvent = $service->events->update($calendarId, $event->getId(), $event);
+
+                // Print the updated date.
+                return $updatedEvent->getUpdated();
+            } catch (Exception $e) {
+                return $e->getMessage();
+            }
+        }
+        else{
+            return ['error' => 404];
+        }        
+    }
+    public function deleteEvent($calendarId, $eventId)
+    {
+        Session::init();
+
+        if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+
+            $this->client->setAccessToken($_SESSION['access_token']);
+            $service = new Google_Service_Calendar($this->client);
+
+            try {
+                $service->events->delete($calendarId, $eventId);
+
+            } catch (Exception $e) {
+                return $e->getMessage();
+            }
+        }
+        else{
+            return ['error' => 404];
+        } 
+        
     }
 }

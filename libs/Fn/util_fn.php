@@ -1,6 +1,6 @@
 <?php
 
-class Util_Fn extends _function {
+class Util_Fn extends Fn {
 
 	/*public function get_client_ip($value='') {
 		$ipaddress = '';

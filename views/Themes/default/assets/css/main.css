@@ -10,6 +10,8 @@ d88' `8b   88bP"Y88b   888P"Y88b  "888P"Y88b   888' `88b
                                                     .o88
 ============================================================ */
 
+
+/*@import url('https://fonts.googleapis.com/css?family=Varela+Round');*/
 body {
     background-color: #f2f2f2;
     color: #000;
@@ -25,6 +27,7 @@ input,
 textarea,
 select,
 button {
+    font-family: "Segoe UI",Arial,sans-serif;
     font-size: 14px
 }
 
@@ -206,6 +209,12 @@ input[type=radio]:disabled {
     position: relative
 }
 
+.control-group{
+    margin-bottom: 8px;
+}
+.control-group:last-child{
+    margin-bottom: 0;
+}
 /* @media (max-width:1600px) {
     body,
     input,
@@ -2046,7 +2055,10 @@ body.drak .ui-calendar-left a:hover {
     padding: 1px 12px;
     position: relative;
 }
-
+.ui-calendar-left-listsitem .e-item .e-color{
+    top: auto; 
+    margin-top: 6px;
+}
 .ui-calendar-left-listsitem .e-time {
     color: #666;
     position: absolute;
@@ -2063,6 +2075,7 @@ body.drak .ui-calendar-left a:hover {
 .e-item .e-name {
     display: inline-block;
     padding: 2px 5px;
+    margin-right: 42px;
 }
 
 .e-item.has-color .e-name {
@@ -2155,12 +2168,15 @@ body.page-calendar {
 .table-calendar td.today .calendar-day:before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -2px;
-    right: -2px;
-    bottom: 0;
+    top: 50%;
+    left: 50%;
     background-color: #0194ff;
-    border-radius: 4px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    -ms-transform: translate(-50%,-50%);
+     -webkit-transform: translate(-50%,-50%); 
+    transform: translate(-50%,-50%);
 }
 
 
@@ -3091,3 +3107,6 @@ body.drak #pageNav>li.active>a:before{
     background-color: #cccccc;
 }
 
+.color-nav a, .color-nav .active .color-border{
+    border-radius: 50%;
+}

@@ -1,6 +1,6 @@
 <?php
 
-class form_Fn extends _function{
+class form_Fn extends Fn{
 
 	public function address( $data=array(), $options=null ) {
 
@@ -133,10 +133,10 @@ class form_Fn extends _function{
 
 
 		$fields = array_merge( array( 
-			'prefix_name' => array('id'=>'prefix_name','label'=> $this->lang->translate('Prefix Name'),'type'=>'select', 'options'=>$this->_prefixName($options['prefix_name']), 'addClass'=>'input-prefix'), 
-			'first_name'  => array('id'=>'first_name','label'=> $this->lang->translate('First Name') ), 
-			'last_name'  => array('id'=>'last_name','label'=> $this->lang->translate('Last Name') ), 
-			'nickname'  => array('id'=>'nickname','label'=> $this->lang->translate('Nickname') ,'addClass' => 'input-nickname')
+			'prefix_name' => array('id'=>'prefix_name','label'=> Translate::Val('Prefix Name'),'type'=>'select', 'options'=>$this->_prefixName($options['prefix_name']), 'addClass'=>'input-prefix'), 
+			'first_name'  => array('id'=>'first_name','label'=> Translate::Val('First Name') ), 
+			'last_name'  => array('id'=>'last_name','label'=> Translate::Val('Last Name') ), 
+			'nickname'  => array('id'=>'nickname','label'=> Translate::Val('Nickname') ,'addClass' => 'input-nickname')
 		), $options['fields'] );
 
 		$_fields = array();
@@ -163,9 +163,9 @@ class form_Fn extends _function{
 	}
 	private function _prefixName( $options=array() ) {
 		
-        $a['Mr.'] = array('id'=>'Mr.', 'name'=> $this->lang->translate('Mr.') );
-        $a['Mrs.'] = array('id'=>'Mrs.', 'name'=> $this->lang->translate('Mrs.') );
-        $a['Ms.'] = array('id'=>'Ms.', 'name'=> $this->lang->translate('Ms.') );
+        $a['Mr.'] = array('id'=>'Mr.', 'name'=> Translate::Val('Mr.') );
+        $a['Mrs.'] = array('id'=>'Mrs.', 'name'=> Translate::Val('Mrs.') );
+        $a['Ms.'] = array('id'=>'Ms.', 'name'=> Translate::Val('Ms.') );
 
         return array_merge($a, $options);
 	}
@@ -180,7 +180,7 @@ class form_Fn extends _function{
 
 		if( $data==null ) $data = $options;
 
-		$days[] = array('id'=>'00', 'name'=> '--'.$this->lang->translate('Date').'--' );
+		$days[] = array('id'=>'00', 'name'=> '--'.Translate::Val('Date').'--' );
 		for ($i=1; $i <= 31; $i++) { 
 			$d = $i < 10 ? "0{$i}":$i;
 		    $days[] = array('id'=>$d, 'name'=> $i);
@@ -189,13 +189,13 @@ class form_Fn extends _function{
 		$fields[] = array( 
 		    'id' => $options['field_first_name'] . '_date',
 		    'name' => $options['field_first_name'] . '[date]', 
-		    'label' => $this->lang->translate('Day'),
+		    'label' => Translate::Val('Day'),
 		    'type' => 'select',
 		    'options' => $days,
 		    'value' => !empty($data['birthday']) ? date('j', strtotime($data['birthday']) ):''
 		);
 
-		$months[] = array('id'=>'00', 'name'=> '--'.$this->lang->translate('Month').'--' );
+		$months[] = array('id'=>'00', 'name'=> '--'.Translate::Val('Month').'--' );
 		for ($i=1; $i <= 12; $i++) { 
 			$m = $i < 10 ? "0{$i}":$i;
 		    $months[] = array('id'=>$m, 'name'=> $this->q('time')->month( $i, 0, $this->lang->getCode() ));
@@ -203,13 +203,13 @@ class form_Fn extends _function{
 		$fields[] = array( 
 		    'id' =>  $options['field_first_name'] . '_month',
 		    'name' => $options['field_first_name'].'[month]', 
-		    'label' => $this->lang->translate('Month'),
+		    'label' => Translate::Val('Month'),
 		    'type' => 'select',
 		    'options' => $months,
 		    'value' => !empty($data['birthday']) ? date('n', strtotime($data['birthday']) ):''
 		);
 
-		$years[] = array('id'=>'0000', 'name'=> '--'.$this->lang->translate('Year').'--');
+		$years[] = array('id'=>'0000', 'name'=> '--'.Translate::Val('Year').'--');
 		$y = date('Y') - $options['end_year'];
 		$i = 1;
 		do {
@@ -220,7 +220,7 @@ class form_Fn extends _function{
 		$fields[] = array( 
 		    'id' =>  $options['field_first_name'] . '_year', 
 		    'name' => $options['field_first_name'].'[year]', 
-		    'label' => $this->lang->translate('Year'),
+		    'label' => Translate::Val('Year'),
 		    'type' => 'select',
 		    'options' => $years,
 		    'value' => !empty($data['birthday']) ? date('Y', strtotime($data['birthday']) ):''
@@ -259,26 +259,26 @@ class form_Fn extends _function{
 	}
 	public function _contact_label_email() {
 		$labels = array();
-		$labels[] = array('text'=> $this->lang->translate('Personal Email') );
-		$labels[] = array('text'=> $this->lang->translate('Work Email') );
-		$labels[] = array('text'=> $this->lang->translate('Other Email') );
+		$labels[] = array('text'=> Translate::Val('Personal Email') );
+		$labels[] = array('text'=> Translate::Val('Work Email') );
+		$labels[] = array('text'=> Translate::Val('Other Email') );
 
 		return $labels;
 	}
 	public function _contact_label_phone($value='') {
 		$labels = array();
-		$labels[] = array('text'=> $this->lang->translate('Mobile Phone') );
-		$labels[] = array('text'=> $this->lang->translate('Work Phone') );
-		$labels[] = array('text'=> $this->lang->translate('Home Phone') );
-		$labels[] = array('text'=> $this->lang->translate('Other phone') );
+		$labels[] = array('text'=> Translate::Val('Mobile Phone') );
+		$labels[] = array('text'=> Translate::Val('Work Phone') );
+		$labels[] = array('text'=> Translate::Val('Home Phone') );
+		$labels[] = array('text'=> Translate::Val('Other phone') );
 		return $labels;
 	}
 	public function _contact_label_social($value='') {
 		$labels = array();
 		$labels = array();
-		$labels[] = array('text'=> $this->lang->translate('Line ID') );
-		$labels[] = array('text'=> $this->lang->translate('Facebook') );
-		$labels[] = array('text'=> $this->lang->translate('Other') );
+		$labels[] = array('text'=> Translate::Val('Line ID') );
+		$labels[] = array('text'=> Translate::Val('Facebook') );
+		$labels[] = array('text'=> Translate::Val('Other') );
 		return $labels;
 	}
 	public function _contacts($type, $options=array(), $name='', $label='', $value='' ) {

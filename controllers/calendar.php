@@ -6,8 +6,24 @@ class Calendar extends Controller {
 		parent::__construct();
 	}
 
-	public function index(){
+	public function index() {
 
+		Session::init();
+
+		if ( isset($_SESSION['access_token']) ){
+			$timestamp = intval($_SESSION['access_token']['created']);
+			$difference = time() - $timestamp;
+			if($difference > 3600){
+				$this->_autoLoginWithGoogle();
+				die;
+				// https://developers.google.com/identity/protocols/OAuth2ForDevices
+			}
+		}
+
+		$this->view->render("calendar/display");
+	}
+
+	public function test(){
 
 		Session::init();
 		$google = new Google();
@@ -59,8 +75,14 @@ class Calendar extends Controller {
 		) );
 
 		echo 'list Events!';
+
+
+		echo '<pre>';
 		print_r($results); die;
+		echo '</pre>';
 	}
+
+
 
 	public function listEvents() {
 		
@@ -73,7 +95,6 @@ class Calendar extends Controller {
 			'calendarId' => $this->getCalendarId()
 		) ) );
 	}
-
 	public function upcoming()
 	{
 		if( empty($this->me) || $this->format!='json' ) $this->error();
@@ -84,5 +105,58 @@ class Calendar extends Controller {
 		echo json_encode( $gCalendar->upcoming( array(
 			'calendarId' => $this->getCalendarId()
 		) ) );
+	}
+
+
+
+	public function get($id=null)
+	{
+		$this->error();
+	}
+	public function add()
+	{
+		if( empty($this->me) || $this->format!='json' ) $this->error();
+
+        $this->view->setPage('path', 'Forms/events');
+		$this->view->render("add");
+	}
+
+
+
+	public function insert() {
+		
+
+		Session::init();
+		$google = new Google();
+		// $client = $google->client;
+
+		$gCalendar = $google->app('calendar');
+
+		$calendarId = 'thaipropertyguide.com_i43s582pm9ttup8lcad2la4o2c@group.calendar.google.com';
+		// insertEvents
+		/*$results = $gCalendar->insertEvent( array(
+			'title' => 'Test 2',
+			'calendarId' => $calendarId,
+			'start' => date('Y-m-d 00:00:00'),
+			'end' => date('Y-m-d 00:00:00'),
+		) );*/
+
+		$eventId = 'v6eotq8ule8l0aakhfqros3pho';
+
+		// get
+		$results = $gCalendar->getEvent($calendarId, $eventId);
+
+
+		// update
+		// $results = $gCalendar->updateEvent($calendarId, $eventId, array('title'=>'test 3'));
+
+
+		// delete
+		// $gCalendar->deleteEvent($calendarId, $eventId); die;
+		
+
+		echo '<pre>';
+		print_r($results); die;
+		echo '</pre>';
 	}
 }

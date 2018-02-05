@@ -1,6 +1,6 @@
 <?php
 
-class User_Fn extends _function
+class User_Fn extends Fn
 {
 	/* 
 		options = {

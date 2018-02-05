@@ -493,10 +493,21 @@ if ( typeof Object.create !== 'function' ) {
 			},
 			refresh: function () {
 				var self = this;
+
 				setTimeout(function () {
 					
 					self.fetch().done(function( res ) {
-	 					
+	 					console.log('done...', res);
+
+	 					if( res.error ){
+
+	 						if( res.error==404 ){
+	 							// alert(res.message);
+	 						}
+
+	 						return false;
+	 					}
+
 	 					self.parent.data_Month = {
 	 						date: self.parent.getDateToStr( self.date.theDate_mini ),
 	 						results: res.items
@@ -507,6 +518,9 @@ if ( typeof Object.create !== 'function' ) {
 			},
 			fetch: function () {
 				var self = this;
+
+				console.log('loading...');
+
 				return $.ajax({
 					url: Event.URL + 'calendar/listEvents',
 					data: { 
@@ -516,8 +530,13 @@ if ( typeof Object.create !== 'function' ) {
 					},
 					dataType: 'json'
 				})
-				.always(function() { })
-				.fail(function() { });
+				.always(function() {
+
+				})
+				.fail(function() {
+
+					// console.log('fail...');
+				});
 			},
 
 			buildFrag: function ( results ) {
@@ -791,7 +810,6 @@ if ( typeof Object.create !== 'function' ) {
 					// lists.length;
 
 					height = (lists.length*22) + 25;
-					console.log( lists.length, lists.length*25 );
 
 					$.each( data.td.closest('tr').find('td'), function(index, el) {
 						
@@ -821,7 +839,12 @@ if ( typeof Object.create !== 'function' ) {
 				setTimeout(function () {
 					
 					self.fetch().done(function( res ) {
-	 
+	 	
+	 					if( res.error ){
+
+	 						return false;
+	 					}
+
 						// self.dataEvt = results;
 						self.buildFrag( res.items );
 						self.display();

@@ -1,6 +1,6 @@
 <?php
 
-class Time_Fn extends _function {
+class Time_Fn extends Fn {
     
     public function live($timestamp, $style=false){
         $timestamp = strtotime($timestamp);
