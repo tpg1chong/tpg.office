@@ -389,4 +389,25 @@ class System_Model extends Model{
         return $this->db->select("SELECT country_id as id, country_code as code, country_name as name FROM country ORDER BY country_name ASC");
     }
 
+
+
+    public function listEventColors()
+    {
+
+        $a = array();
+        $a[] = array('id'=>1, 'background'=>'#a4bdfc', 'foreground'=>'#1d1d1d', 'title'=>'');
+        $a[] = array('id'=>2, 'background'=>'#7ae7bf', 'foreground'=>'#1d1d1d', 'title'=>'');
+        $a[] = array('id'=>3, 'background'=>'#dbadff', 'foreground'=>'#1d1d1d', 'title'=>'');
+        $a[] = array('id'=>4, 'background'=>'#ff887c', 'foreground'=>'#1d1d1d', 'title'=>'');
+        $a[] = array('id'=>5, 'background'=>'#fbd75b', 'foreground'=>'#1d1d1d', 'title'=>'');
+        $a[] = array('id'=>6, 'background'=>'#ffb878', 'foreground'=>'#1d1d1d', 'title'=>'');
+        $a[] = array('id'=>7, 'background'=>'#46d6db', 'foreground'=>'#1d1d1d', 'title'=>'');
+        $a[] = array('id'=>8, 'background'=>'#e1e1e1', 'foreground'=>'#1d1d1d', 'title'=>'');
+        $a[] = array('id'=>9, 'background'=>'#5484ed', 'foreground'=>'#1d1d1d', 'title'=>'');
+        $a[] = array('id'=>10, 'background'=>'#51b749', 'foreground'=>'#1d1d1d', 'title'=>'');
+        $a[] = array('id'=>11, 'background'=>'#dc2127', 'foreground'=>'#1d1d1d', 'title'=>'');
+        
+        return $a;
+    }
+
 }

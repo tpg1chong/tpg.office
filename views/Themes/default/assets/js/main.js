@@ -1,3 +1,18 @@
+var EventColors = [
+	{ 'background': '#a4bdfc', 'foreground': '#1d1d1d', 'title': ''},
+	{ 'background': '#7ae7bf', 'foreground': '#1d1d1d', 'title': ''},
+	{ 'background': '#dbadff', 'foreground': '#1d1d1d', 'title': ''},
+	{ 'background': '#ff887c', 'foreground': '#1d1d1d', 'title': ''},
+	{ 'background': '#fbd75b', 'foreground': '#1d1d1d', 'title': ''},
+	{ 'background': '#ffb878', 'foreground': '#1d1d1d', 'title': ''},
+	{ 'background': '#46d6db', 'foreground': '#1d1d1d', 'title': ''},
+	{ 'background': '#e1e1e1', 'foreground': '#1d1d1d', 'title': ''},
+	{ 'background': '#5484ed', 'foreground': '#1d1d1d', 'title': ''},
+	{ 'background': '#51b749', 'foreground': '#1d1d1d', 'title': ''},
+	{ 'background': '#dc2127', 'foreground': '#1d1d1d', 'title': ''},
+];
+
+
 var __Elem = {
 	anchorBucketed: function (data) {
 		

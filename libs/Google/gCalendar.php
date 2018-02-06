@@ -44,6 +44,7 @@ class gCalendar extends Google {
         return $arr;
     }
 
+
 	public function listEvents( $options=array() ) {
         Session::init();
 
@@ -66,33 +67,34 @@ class gCalendar extends Google {
         $arr = array(); $list = array();
         if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
 
-            try {
-                $this->client->setAccessToken($_SESSION['access_token']);
-                $this->service = new Google_Service_Calendar($this->client);
+            // try {
+            $this->client->setAccessToken($_SESSION['access_token']);
+            $this->service = new Google_Service_Calendar($this->client);
 
-                if( is_array($options['calendarId']) ){
-                    foreach ($options['calendarId'] as $id) {
+            if( is_array($options['calendarId']) ){
+                foreach ($options['calendarId'] as $id) {
 
-                        $list = array_merge( $list, $this->loadListEvents( $id, $optParams ) );
+                    $results = $this->loadListEvents( $id, $optParams );
+                    
+                    if( empty($results['error']) ){
+                        $list = array_merge( $list, $results );
                     }
                 }
-                else{
-                    $list = $this->loadListEvents( $options['calendarId'], $optParams );
-                }
-
-                function usortDate($a, $b) {
-                    return strtotime($a['start']) - strtotime($b['start']);
-                }
-                usort($list, "usortDate");
-
-                $arr['items'] = $list;
-
-            } catch (Exception $e) {
-
-                // return $e->getMessage();
-            	$arr['error'] = 400;
-                $arr['message'] = 'api disconnect';
             }
+            else{
+                $results = $this->loadListEvents( $options['calendarId'], $optParams );
+
+                if( empty($results['error']) ){
+                    $list = $results;
+                }
+            }
+
+            function usortDate($a, $b) {
+                return strtotime($a['start']) - strtotime($b['start']);
+            }
+            usort($list, "usortDate");
+
+            $arr['items'] = $list;
 
         } else {
 
@@ -106,17 +108,24 @@ class gCalendar extends Google {
         return $arr;
     }
     public function loadListEvents( $id, $optParams, $options=array() ) {
-        $results = $this->service->events->listEvents($id, $optParams);
 
-        $listEvents = array();
-        if (count($results->getItems()) > 0) {
+        try {
 
-            foreach ($results->getItems() as $event) {
-                $listEvents[] = $this->convertListEvents($event, $options);
+            $results = $this->service->events->listEvents($id, $optParams);
+
+            $listEvents = array();
+            if (count($results->getItems()) > 0) {
+
+                foreach ($results->getItems() as $event) {
+                    $listEvents[] = $this->convertListEvents($event, $options);
+                }
             }
-        }
 
-        return $listEvents;
+            return $listEvents;
+        } catch (Exception $e) {
+            return json_decode($e->getMessage(), 1);
+        }
+        
     }
     public function convertListEvents( $event, $options=array() ) {
 
@@ -171,7 +180,28 @@ class gCalendar extends Google {
         return $fdata;
     }
 
+    public function listColors()
+    {
+        Session::init();
 
+        if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+
+            $this->client->setAccessToken($_SESSION['access_token']);
+            $service = new Google_Service_Calendar($this->client);
+            $colors = $service->colors->get();
+
+            $data = array();
+            foreach ($colors->getEvent() as $key => $color) {
+
+                $data[ $key ] = array(
+                    'background' => $color->getBackground(),
+                    'foreground' => $color->getForeground(),
+                );
+            }
+
+            return $data;
+        }
+    }
     public function setColorsEvent() {
         
         $colors = $this->service->colors->get();
@@ -204,7 +234,7 @@ class gCalendar extends Google {
                 $event = $service->events->get($calendarId, $eventId);
                 return $event;
             } catch (Exception $e) {
-                return $e->getMessage();
+                return json_decode($e->getMessage(), 1);
             }
         }
         else{
@@ -215,12 +245,15 @@ class gCalendar extends Google {
     public function insertEvent( $options=array() ) {
         Session::init();
 
+        // https://developers.google.com/google-apps/calendar/v3/reference/events/insert
         $options = array_merge( array(
             'title' => '',
             'location' => '',
             'description' => '',
-            'start' => isset($_REQUEST['start']) ? $_REQUEST['start']: date('Y-m-d'),
-            'end' => isset($_REQUEST['end']) ? $_REQUEST['end']: date('Y-m-d'),
+
+            'allday' => 1,
+            'start' => date('Y-m-d'),
+            'end' => date('Y-m-d'),
 
             'calendarId' => 'primary',
             'timeZone' => $this->_timeZone,
@@ -232,25 +265,32 @@ class gCalendar extends Google {
             $this->client->setAccessToken($_SESSION['access_token']);
             $service = new Google_Service_Calendar($this->client);
 
-            $event = new Google_Service_Calendar_Event( array( 
+            $post = array( 
                 'summary' => $options['title'],
                 'location' => $options['location'],
                 'description' => $options['description'],
                 'start' => array(
-                    'date' => date('Y-m-d', strtotime($options['start'])),
-                    // 'dateTime' => date('c', strtotime($options['start'])),
                     'timeZone' => $options['timeZone'],
                 ),
                 'end' => array(
-                    'date' => date('Y-m-d', strtotime($options['end'])),
-                    // 'dateTime' => date('c', strtotime($options['end'])),
                     'timeZone' => $options['timeZone'],
                 ),
 
                 'reminders' => array(
                     'useDefault' => false,
                 ),
-            ) );
+            );
+
+            if( !empty($options['allday']) ){
+                $post['start']['date'] = date('Y-m-d', strtotime($options['start']));
+                $post['end']['date'] = date('Y-m-d', strtotime($options['end']));
+            }
+            else{
+                $post['start']['dateTime'] = date('c', strtotime($options['start']));
+                $post['end']['dateTime'] = date('c', strtotime($options['end']));
+            }
+
+            $event = new Google_Service_Calendar_Event( $post );
 
             // $event = new Google_Service_Calendar_Event([
             //     'summary' => $options['title'],
@@ -286,7 +326,7 @@ class gCalendar extends Google {
             try {
                 $results = $service->events->insert($options['calendarId'], $event);
             } catch (Exception $e) {
-                return $e->getMessage();
+                return json_decode($e->getMessage(), 1);
             }
 
             
@@ -328,7 +368,7 @@ class gCalendar extends Google {
                 // Print the updated date.
                 return $updatedEvent->getUpdated();
             } catch (Exception $e) {
-                return $e->getMessage();
+                return json_decode($e->getMessage(), 1);
             }
         }
         else{
@@ -348,7 +388,7 @@ class gCalendar extends Google {
                 $service->events->delete($calendarId, $eventId);
 
             } catch (Exception $e) {
-                return $e->getMessage();
+                return json_decode($e->getMessage(), 1);
             }
         }
         else{
