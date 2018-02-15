@@ -1,0 +1,726 @@
+getthatf_wordpress
+DwkT6iAk
+v8RNoOCtSjs&W7pH)(
+
+https://www.apple.com/th/macbook-pro/specs-2015/
+https://javascript-minifier.com/
+
+- mpmf
+- sume 
+- fantasy
+- IBKB
+- Arima
+- GYM
+- POs
+- tour
+- ticket
+- TravelmartBkk
+- naturetrekth.com 
+- paautosupply.co.th
+- samsai
+- cambodia-logistics.com
+- getthatfit.com
+- I Need
+- champeesilom.com
+- arsarom.com
+- hair-magazine.com
+- smile.co.th
+- tourism999.com
+
+narrator
+oral, proter
+
+
+http://www.fromupnorth.com/web-design-inspiration-1192/
+
+iPads (portrait and landscape) = 768px
+Smartphones(landscape), iPhone 4,5, Samsung Galaxy S3, S4 = 320px
+Samsung Galaxy S5 = 360px
+iPhone 6 = 375px
+iPhone 6+ = 414px
+
+===========================================
+================== mpmf  ==================
+===========================================
+database: mpmf_db 
+host: http://www.vm101.net:8080/
+user: mpmf_dbo 
+password: TheatreNavy8HourHeaven
+
+===========================================
+================== sume ==================
+===========================================
+http://www.vm101.net:8080/
+user: sume
+password: )YN5ak(hi6ZDsJkj8RJIIra4 
+
+SFTP 27.254.77.234  port 62 
+user : sume 
+pass : bet!dummy$excise
+
+
+===========================================
+================== mgprogress ==================
+===========================================
+http://mgprogress.com
+
+
+
+
+===========================================
+================== fantasy ==================
+===========================================
+IP : 27.254.77.234
+User : fantasy
+Pass : dish=throw$sixtha
+Port : 62
+
+http://www.vm101.net:8080/
+Database: fantasy_db
+User: fantasy_dbo
+Password: Conceal2Democracy8Continue
+
+
+===========================================
+================== IBKB  ==================
+===========================================
+https://docs.google.com/spreadsheets/d/12i206HuZJv6q_ZgUgeBJW8R4U7YQkHx7ke29K9oMy6k/edit#gid=0
+
+http://www.internationalbangkokbike.com:2222
+Username: internadm
+Password: OJCz6NGS!
+
+===========================================
+================== KU.AC.TH ===============
+===========================================
+
+http://www.ku.ac.th/web2012/index.php?c=adms&m=mainpage1
+http://www.ku.ac.th/kunews/news59/kujournal.html
+http://www.ready-tutor.com/
+
+F4L2R3ll@gmail.com
+
+
+tpg.chong@gmail.com
+?lockadmin90
+
+===========================================
+================== Arima ==================
+===========================================
+- Wifi 
+pass: TD525354
+
+arima.vm101.net
+SFTP : 27.254.77.234 port 62
+user: arima
+password: devise$near!like
+
+
+MySQL http://www.vm101.net:8080/
+Database: arima_db
+User: arima_dbo
+Password: EasternCertain1Tongue
+
+// 
+user: arima@themaskthailand.com
+pass: ijHUoQ1Brh
+
+Database:	getthatf_arima
+Host:		localhost
+Username:	getthatf_arimadb
+Password:	vov7uQEk
+
+===========================================
+================== PAY ====================
+===========================================
+https://phoenix.playwire.com/en/signup
+
+===========================================
+================== GYM ====================
+===========================================
+- Sample
+http://www.presenthaus.com/fitbox-fitness
+
+- Program
+http://thehybridathlete.com/store/
+
+
+===========================================
+================== POs ====================
+===========================================
+- Demo
+https://www.youtube.com/watch?v=-UzED8zUPmo
+
+
+- sound for Google Translate
+http://soundoftext.com./
+
+
+
+===========================================
+================== tour ===================
+===========================================
+- SFTP tour
+IP:       27.254.77.234 port 62
+user:     tour
+password: iron&chance=holly
+
+- Database
+MySQL:    http://www.vm101.net:8080/
+mysql:    http://my.vm101.net/
+Database: tour_coth
+User:     tour_dbowner
+Password: SweetLungSecretEarth
+
+Username : monkey.d.chong@gmail.com
+Password : ZE3bWC
+
+Webmaster Central	
+https://www.google.com/webmasters/verification/home?hl=th&entry=true
+
+https://developers.google.com/speed/pagespeed/insights/?url=naturetrekth.com&tab=desktop
+
+https://zxndq3zdm3.gymmasteronline.com/visitor
+user: kappakub@gmail.com
+pass: 789456123
+
+- Ariline
+http://www.crewsociety.com/2411
+
+- Sample
+https://th.trovit.com/baan/
+
+
+
+
+================================================
+             ticket.vm101.net
+=================================================
+ticket.vm101.net
+
+sftp: 27.254.77.234
+port 62
+
+User: ticket
+
+Pass: kitten!fly*boyish
+
+http://www.vm101.net:8080/
+
+Database: ticket_db
+
+User: ticket_dbo
+
+Password: AttitudeHurtDirect*Interest5
+
+
+
+
+
+================================================
+              TravelmartBkk
+=================================================
+
+TravelmartBkk.vm101.net
+SFTP 27.254.77.234 port 62
+user: travelmartbkk
+password: stupid$veto&pastel
+
+MySQL
+http://www.vm101.net:8080/
+Database: travelmart_db
+User: travelmart_owner
+Password: 2#CoastMarry
+
+https://www.thaisriram.com/
+
+
+
+
+
+
+==================================================
+		naturetrekth.com
+==================================================
+Domain Name	naturetrekth.com
+Package	Smart Plan
+Manage Hosting	http://122.155.17.247:2222 , http://cp.naturetrekth.com:2222
+Login Hosting	naturetrek
+Password Hosting	nat@0305
+PHPMysql	http://122.155.17.247/phpmyadmin
+
+Domain and FTP Information
+IP Address	122.155.17.247
+FTP Address	ftp.naturetrekth.com  (port: 21)
+FTP Login	naturetrek
+FTP Password	nat@0305
+Mail Access Information
+Use Google Apps
+SMTP Server Address	smtp.gmail.com (Port 465 ssl)
+POP3 Server	pop.gmail.com (Port 995 ssl)
+Web mail Admin	http://admin.google.com
+Web mail Client	http://www.gmail.com
+
+
+
+
+
+===========================================
+================== TPG ====================
+===========================================
+# https://twitter.com/
+user: TPGThailand
+pass: ?lockadmin9TPG
+
+# Instagram
+user: admin@thaipropertyguide.com
+pass: ?lockadmin9TPG
+
+# linkedin
+user: admin@thaipropertyguide.com
+pass: ?lockadmin9TPG
+
+https://www.facebook.com/ThaiPropertyGuide.com
+
+
+https://github.com
+user: tpg1chong
+pass: ?lockadmin90
+tpg.chong@gmail.com
+
+
+35554978+tpg1chong@users.noreply.github.com
+
+
+- Web Sample
+http://preview.themeforest.net/item/houzez-real-estate-html-template/full_screen_preview/19062100
+https://caza.ae/for-rent
+https://www.pinterest.com/pin/251146116701178494/
+
+Demo:
+https://www.thailand-property.com/
+https://www.somerset.com
+
+
+- Hots Web Tool
+SFTP 27.254.77.235 port 62
+user: tpgweb
+password: WebAdmin@TPG11
+
+- DB Web Tool
+27.254.77.235
+MySQL  http://www.thaipropertyguide.com:8888/MySQl_MyAdmin.php
+Database: tpg__
+User: tpgapp
+Pass: TPG@minDB
+
+- carol form Web Tool
+users: carol
+user: carol
+pass: tpgcarol341
+
+www.thaipropertyguide.co.th/admin
+user: tpgadmin
+pass: sOn%0m($Tvgfx^07R^PK$Ci6
+
+- Hots Web .co.th
+http://www.thaipropertyguide.com:8888/MySQl_MyAdmin.php
+database: tpg_wp
+user: wpadmin
+password: B8KvgJgLfRcBmQjD
+
+office.thaipropertyguide.com
+SFTP 27.254.77.235 port 62
+user: office
+password: Route3Some$ItsWo
+
+
+ftp: 27.254.77.234 port 62
+user: jitwilaitour
+pass: label$comedy=mock
+
+MySQL
+http://my.vm101.net
+Database: jitwilaitour_db
+User: jitwilaitour_dbo
+Password: ObservationCampaignDoctor8Shift
+
+
+https://server1.itfeverhost.com:2222/
+user: thaiproper
+pass: tppg@2016
+
+ftp: 27.254.140.121
+user: thaiproper
+pass: tppg@2016
+
+https://server1.itfeverhost.com/phpMyAdmin/
+Database: thaiproper_webdb
+Host: localhost
+Username: thaiproper_web
+Password: vOZ8jjfBhU
+
+- backend developer: www.thaipropertyguide.co.th/admin
+user: tpgadmin
+pass: sOn%0m($Tvgfx^07R^PK$Ci6
+
+- IP
+180.183.118.151
+183.89.212.151
+
+- gmail
+chong.thaipropertyguide@gmail.com
+?lockadmin9
+
+
+Database: thaiproper_owner
+Host:	  localhost
+Username: thaiproper_owner
+Password: lahYIxeXe
+
+
+
+
+http://www2.hm.com/es_es/index.html#about
+
+
+
+
+==================================================
+		samsai
+==================================================
+samsai.vm101.net
+SFTP 27.254.77.234 port 62
+user: samsai
+password: shyly-tense_teak
+MySQL
+http://www.vm101.net:8080/
+Database: samsai_db
+User: samsai_dbowner
+Password: CircuitFacilitySeizeExcess
+==================================================
+
+PHP Webcam Live Streaming
+https://sourceforge.net/projects/phplivestream/
+
+
+==================================================
+		cambodia-logistics.com
+==================================================
+Domain Name	  cambodia-logistics.com
+Manage Hosting	  http://122.155.17.247:2222 , http://cp.cambodia-logistics.com:2222
+Login Hosting	  cambodia
+Password Hosting  cam@0508
+PHPMysql	  http://122.155.17.247/phpmyadmin
+
+IP Address	122.155.17.247
+FTP Address	ftp.cambodia-logistics.com  (port: 21)
+FTP Login	cambodia
+FTP Password	cam@0508
+SMTP/POP Server Address	mail.cambodia-logistics.com
+Web mail	http://webmail.cambodia-logistics.com
+
+db name cambodia_ssdd
+db user cambodia_ssd
+db pass GvNphMXOpFkg
+
+- email
+combodialogisticsbangkok@gmail.com
+==================================================
+		getthatfit.com
+==================================================
+
+https://www.google.com/accounts/AccountChooser?Email=chong@igottajet.com&continue=https://apps.google.com/user/hub
+user: chong@igottajet.com
+pass: CP%VBe86
+
+https://122.155.18.49:2222/ หรือ https://www.getthatfit.com:2222/
+Username: getthatf
+Password: K83ev9vs0Y
+
+FTP Hostname: getthatfit.com หรือ 122.155.18.49 // https://ns61.hostinglotus.net:2222/
+FTP Username: getthatf
+FTP Password: K83ev9vs0Y
+FTP Port : 2002
+
+Incoming Mail Server (POP3) : mail.getthatfit.com
+Outgoing Mail Server (SMTP) : mail.getthatfit.com
+Username (ต้องตามด้วย @getthatfit.com ) และ Password ตามที่สร้างขึ้นผ่านทาง Direct Admin Control Panel
+
+Database:	getthatf_testdb
+Host:		localhost
+Username:	getthatf_test
+Password:	WAklOorEX
+
+FTP: humanstrongth.com
+port 2002
+user: admin@humanstrongth.com 
+pass: 0bQ223d0
+
+Database:	getthatf_human
+Host:		localhost
+Username:	getthatf_human
+Password:	human_getthatfit
+
+igottajet.com
+user: web@igottajet.com
+pass: 3mYfQx6Cc
+Database: getthatf_clinicdb
+Username: getthatf_clinic
+Password: giq8XpDF
+
+
+Username:	admin@igottajet.com
+Password:	mfZmnkVDqF
+Pop3 Server:	mail.igottajet.com
+Smtp Server:	mail.igottajet.com
+
+
+Database:	getthatf_mpmf
+Host:	localhost
+Username:	getthatf_mpmfdb
+Password:	EkyG1mZq
+
+smile.themaskthailand.com
+user: smile@themaskthailand.com
+pass: 70J9y4u5No
+post: 2002
+Database:	getthatf_smile
+Host:		localhost
+Username:	getthatf_smileDB
+Password:	x806xe9o
+
+&nbsp;
+&lt; < (less than)
+&gt; > (greater than)
+&amp; & (ampersand) 
+
+==================================================
+		I Need
+==================================================
+1. PC
+- CPU INTEL 1151 CORE I7 6700K 4.0 GHz 12,550.-
+- MAINBOARD 1151 MSI Z170A GAMING M5 6,990.-
+- Kingston HyperX SSD 240G 3500.-
+- Ram G.Skill Ripjaws Dual 8x2 2800C 16-16-16-36 1.2V 4,190,-
+- CPU LIQUID COOLER CORSAIR H100i GTX 3,200.-
+- POWER SUPPLY COUGAR 850W CMX 80+ BRONZE 3,690.-
+
+- CASE FRACTAL DESIGN DEFINE R5 TITANIUM WINDOW 4,080.-
+
+= 41,660.-
+
+
+- Roccat Headset KAVE XTD 5.1 Analog 2,790.- /
+
+- MSI GTX980TI GAMING 6G 
+
+
+- 27" LED BENQ XL2720Z 15,900.-
+- MOUSE COUGAR 700M BLACK 2,990.-
+- MOUSE PAD COUGAR GAMING SPEED LARGE 690.-
+- SOFTWARE MS-WINDOWS 10 PRO 64 BIT ENG 5,790.-
+
+2. Fujifilm x-a3 18,000
+4. Huawei P9 17000
+ 
+
+==================================================
+		champeesilom.com
+==================================================
+Domain Name	champeesilom.com
+Package	Beginner Plan
+Manage Hosting	http://27.254.140.121:2222/ ,
+Login Hosting	champeesi
+Password Hosting	cha@0108
+PHPMysql	http://27.254.140.121/phpmyadmin
+Domain and FTP Information
+IP Address	27.254.140.121
+FTP Address	ftp.champeesilom.com  (port: 21)
+FTP Login	champeesi
+FTP Password	cha@0108
+Mail Access Information
+SMTP/POP Server Address	mail.champeesilom.com
+Web mail	http://webmail.champeesilom.com
+
+gmail: ChampeeSilom.official@gmail.com
+pass: ?lockchampee9
+
+dropbox: web2@smile.co.th
+pass: ?lockweb28
+
+DB_TYPE	mysql
+DB_HOST	localhost
+DB_NAME	champeesi_lom
+DB_USER	champeesi_lom
+DB_PASS	lom@5555
+
+
+==================================================
+		arsarom.com
+==================================================
+Domain Name	arsarom.com
+Package	Zoho Mail + Domain + Hosting 2 GB
+Manage Hosting	http://122.155.17.247:2222 , http://cp.arsarom.com:2222
+Login Hosting	arsarom
+Password Hosting	ars@1011
+PHPMysql	http://122.155.17.247/phpmyadmin
+
+Domain and FTP Information
+IP Address	122.155.17.247
+FTP Address	ftp.arsarom.com  (port: 21)
+FTP Login	arsarom
+FTP Password	ars@1011
+
+Mail Access Information
+SMTP Server Address	smtp.zoho.com (Port 465 ssl)
+POP3 Server	pop.zoho.com (Port 995 ssl)
+Web mail	mail.arsarom.com
+NameServer Information
+NameServer 1	ns7.itfever.com
+NameServer 2	ns8.itfever.com
+
+Database:	arsarom_dbname
+Host:	localhost
+Username:	arsarom_dbuser
+Password:	LUjqsEgFJe
+
+
+==================================================
+http://hair-magazine.com/
+==================================================
+user: hairbeauty.channel@gmail.com
+pass: ?l0ckhairbeauty
+
+gmail:hairbeauty1channel@gmail.com
+pass:smile4569
+
+hair-magazine.com
+SFTP 27.254.77.234 port 62
+user: hairmag
+password: pedal&coupon!broom
+
+MySQL
+http://www.vm101.net:8080/
+Database: hairmag_db
+User: hairmag_dbo
+Password: Proper!1Debate
+
+
+www.stats.in.th
+user: hairmagazine
+pass: hair1234--
+
+
+==================================================
+	http://paautosupply.co.th/
+==================================================
+Control Panel Login
+Domain Name	paautosupply.co.th
+Package	Zoho Mail
+Manage Hosting	http://122.155.17.247:2222 , http://cp.paautosupply.co.th:2222
+Login Hosting	paautosupply
+Password Hosting	paa@0508
+PHPMysql	http://122.155.17.247/phpmyadmin
+Domain and FTP Information
+IP Address	122.155.17.247
+FTP Address	ftp.paautosupply.co.th  (port: 21)
+FTP Login	paautosup
+FTP Password	paa@0508
+Mail Access Information
+SMTP/POP Server Address	smtp.zoho.com , pop.zoho.com
+Web mail	http://mail.paautosupply.co.th
+
+http://pantip.com/topic/35814078
+
+
+
+
+
+==================================================
+	getthatfit.com
+==================================================
+https://122.155.18.49:2222/ https://www.getthatfit.com:2222/
+Username: getthatf
+Password: K83ev9vs0Y
+
+FTP Hostname: getthatfit.com  122.155.18.49
+fFTP Username: getthatf
+fFTP Password: K83ev9vs0Y
+FTP Port : 2002
+
+humanstrongth.com:2222
+a83rX52Ra
+392487658
+
+pass: o6cHibHpq
+
+
+link: http://www.web.themaskthailand.com/
+host: themaskthailand.com
+user: web@themaskthailand.com
+pass: wx9sUpBl
+port: 2002
+
+
+link: 		http://www.themaskthailand.com/phpmyadmin
+Database:	getthatf_web
+Host:		localhost
+Username:	getthatf_web
+Password:	w9fSLGag3f
+
+
+==================================================
+                  smile.co.th
+==================================================
+ftp.smile.co.th Post: 21
+user: smile
+pass: wis@1234
+
+
+
+==================================================
+                  tourism999.com
+==================================================
+Domain Name	tourism999.com
+
+Manage Hosting:	http://122.155.17.247:2222 , http://cp.tourism999.com:2222
+Login Hosting:		tourismc
+Password Hosting	tou@2701
+PHPMysql	http://122.155.17.247/phpmyadmin
+Database:	tourismc_88
+Host:	        localhost
+Username:	tourismc_99
+Password:	XD8nQxJhfsB98k
+
+Domain and FTP Information
+IP Address	122.155.17.247
+FTP Address	ftp.tourism999.com  (port: 21)
+FTP Login	tourismc
+FTP Password	tou@2701
+
+
+
+https://www.youtube.com/watch?v=RIwqVMf2434
+https://www.youtube.com/watch?v=V8oDm5l2Zd8&t=147s
+https://www.youtube.com/watch?v=xUo8EBZ78rk
+https://www.youtube.com/watch?v=xBexZQ32Tnc
+http://playcooling.com/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%A5%E0%B8%B0%E0%B9%80%E0%B8%AD%E0%B8%B5%E0%B8%A2%E0%B8%94%E0%B8%AA%E0%B8%B4%E0%B8%99%E0%B8%84%E0%B9%89%E0%B8%B2-79491-%E0%B8%9A%E0%B8%A5%E0%B9%87%E0%B8%AD%E0%B8%81-gtx1080-gtx1070-ref.html
+
+
+
+http://deep-dive.pharmaphorum.com/deep-dive-oncology-may-2017#!/immunotherapies-in-oncology
+
+https://www.jib.co.th/web/index.php/product/readProduct/17287/35/2.5-ENCLOSURE-ORICO-DVD-BAY-9.5mm-L95SS
+https://www.jib.co.th/web/index.php/product/readProduct/17383/29/120-Gb-Ssd-Ocz-Vector-180
+https://www.youtube.com/watch?v=y71mgaM3fY0
+https://www.jib.co.th/web/index.php/product/product_list/2/52
+http://ssd.userbenchmark.com/Compare/Samsung-850-Evo-250GB-vs-Samsung-850-Pro-256GB/2977vs2385
+
+https://www.instagram.com/zizowireless/
+https://www.samsung.com/us/computing/monitors/led/samsung-24-curved-led-monitor-lc24f390fhnxza/
+
+Vespa LX150ie
+http://vespa.co.th/product/lx/lx-125-i-get/
+https://store.vespa.com/gb_en/vespa-black-orange-visor-2343.html
+http://smovestabilizer.com/order/
