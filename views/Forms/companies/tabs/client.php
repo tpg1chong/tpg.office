@@ -1,5 +1,5 @@
 
-<div class="phl">
+<div class="phl mbl">
 
 	<form class="mbl" data-action-contact="search">
 		<table>
@@ -29,8 +29,8 @@
 					<div style="overflow: hidden;"><h3><?=$val['name']?></h3></div>
 				</div>
 				<div class="actions">
-					<a class="btn-icon"><i class="icon-pencil"></i></a>
-					<a class="btn-icon"><i class="icon-trash-o"></i></a>
+					<!-- <a class="btn-icon"><i class="icon-pencil"></i></a> -->
+					<!-- <a class="btn-icon"><i class="icon-trash-o"></i></a> -->
 				</div>
 			</header>
 

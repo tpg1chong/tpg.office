@@ -408,6 +408,7 @@ a.btn-icon:hover{text-decoration:none}
 .model.danger .model-container{color:#fff;background-color:#e74c3c}
 .model-gallery{display:table;height:100% !important;table-layout:fixed;width:100%}
 .model-gallery.black{background:rgba(0,0,0,.75)}
+
 @media (max-width:480px) {
 .model-dialog .model-container{width:auto;margin-left:12px;margin-right:12px}}
 .gallery-container{margin:20px 0;-webkit-user-select:none}

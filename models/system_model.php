@@ -410,4 +410,46 @@ class System_Model extends Model{
         return $a;
     }
 
+
+    /* -- country -- */
+    public function countryList()
+    {
+        return $this->db->select( "
+            SELECT 
+              idcountry as id
+            , country as name
+            , code
+            , nationality
+
+            FROM country 
+            ORDER BY country ASC
+        " );
+    }
+
+    public function statusList($key)
+    {
+        return $this->db->select( "
+            SELECT 
+              idstatus as id
+            , name as name
+            , description
+
+            FROM status 
+            WHERE {$key}=1
+            ORDER BY name ASC
+        " );
+    }
+
+    public function requirementList()
+    {
+        $a = array();
+        $a[] = array('id'=>1, 'name'=>'Non-serviced accommodation');
+        $a[] = array('id'=>2, 'name'=>'Serviced apartment');
+        $a[] = array('id'=>3, 'name'=>'Office for rent');
+        $a[] = array('id'=>4, 'name'=>'Hotel');
+        $a[] = array('id'=>5, 'name'=>'Housing relocation');
+
+        return $a;
+    }
+
 }

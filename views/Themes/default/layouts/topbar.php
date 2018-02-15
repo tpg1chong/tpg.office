@@ -74,10 +74,9 @@ $pageNavR .= '<li class="uiToggle headerAvatarWrap">'.
 
     '<div class="uiToggleFlyout uiToggleFlyoutRight uiToggleFlyoutPointer" id="accountSettingsFlyout"><ul role="menu" class="uiMenu">'.
 
-            '<li class="menuItem head"><a class="itemAnchor" href="#"><span class="itemLabel"><div class="clearfix"><div class="anchor"><div class="clearfix">'.$imageAvatarBig.'<div class="content"><div class="spacer"></div><div class="massages"><div class="fullname">'.$this->me['fullname'].'</div></div></div></div></div></div></span></a></li>'.
+            '<li class="menuItem head"><a class="itemAnchor" href="#"><span class="itemLabel"><div class="clearfix"><div class="anchor"><div class="clearfix">'.$imageAvatarBig.'<div class="content"><div class="spacer"></div><div class="massages"><div class="fullname">'.$this->me['username'].'</div></div></div></div></div></div></span></a></li>'.
 
             /*<li class="menuItemDivider" role="separator"></li>
-
             <li class="menuItem"><a class="itemAnchor" href="http://localhost/events/manage/index.php"><span class="itemLabel">จัดการระบบ</span></a></li>*/
 
             '<li class="menuItemDivider" role="separator"></li>'.
@@ -120,7 +119,6 @@ if( !empty($this->topbar['back_url']) ){
 		echo '<a class="m-menu-toggle icon" href="'.$this->topbar['back_url']['url'].'"><i class="'.$this->topbar['back_url']['icon'].'"></i></a>';
 	}
 	else{
-
 		echo '<a class="m-menu-toggle icon" href="'.$this->topbar['back_url'].'"><i class="icon-arrow-left"></i></a>';
 	}
 }

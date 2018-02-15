@@ -34,6 +34,8 @@ class Users_Model extends Model{
         return $this->db->count($this->_objType, "name='{$text}'");
     }
 
+
+    /* -- actions -- */
     public function insert(&$data) {
         
         $data["{$this->_cutNamefield}created"] = date('c');
@@ -56,12 +58,14 @@ class Users_Model extends Model{
         $this->db->delete($this->_objType, "{$this->_cutNamefield}id={$id}");
     }
 
+    
+    /* -- find -- */
     public function get($id){
         $sth = $this->db->prepare("SELECT {$this->_field} FROM {$this->_table} WHERE iduser=:id LIMIT 1");
         $sth->execute( array( ':id' => $id  ) );
         return $sth->rowCount()==1 ? $this->convert( $sth->fetch( PDO::FETCH_ASSOC ) ): array();
     }
-    public function lists( $options=array() ) {
+    public function find( $options=array() ) {
 
         $options = array_merge(array(
             'pager' => isset($_REQUEST['pager'])? $_REQUEST['pager']:1,
@@ -105,6 +109,7 @@ class Users_Model extends Model{
     }
 
 
+    /* -- convert data -- */
     public function buildFrag($results, $options=array()) {
         $data = array();
         foreach ($results as $key => $value) {
@@ -120,12 +125,12 @@ class Users_Model extends Model{
         if( !empty($data['lastname']) ){
             $data['fullname'] .= ' '.trim($data['lastname']);
         }
+
+
         $data['access'] = $this->setAccess($data['role_id']);
 
         return $data;
     }
-
-
     public function setAccess($id)  {
         $access = array();
         if( $id == 1 ){
@@ -159,9 +164,7 @@ class Users_Model extends Model{
         return $sth->rowCount()==1 ? $fdata['id']: false;
     }
 
-    /**/
-    /* roles */
-    /**/
+    /* -- admin roles -- */
     public function roles($type='') {
         return $this->db->select("SELECT role_id as id, role_name as name FROM users_role ORDER BY role_name");
     }

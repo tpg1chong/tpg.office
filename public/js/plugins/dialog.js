@@ -1,13 +1,11 @@
 window.onbeforeunload = function (event) {
     /*var message = 'Important: Please click on \'Save\' button to leave this page.';
-
     if (typeof event == 'undefined') {
         event = window.event;
     }
     if (event) {
         event.returnValue = message;
     }
-
     return message;*/
 };
 
@@ -98,13 +96,25 @@ var Dialog = {
 
 		// check btn close
 		if( self.$pop.find('[role=dialog-close]').length==0 ){
+
 			self.$close = $('<a/>', { href:"#" }).addClass('model-close').html( $('<i/>', {class: 'icon-remove'}) );
 			self.$pop.append( self.$close );
+			self.settings.close = false;
 		}
 		else{
+
 			self.$close = self.$pop.find('[role=dialog-close]');
 			self.$close.removeAttr('role');
 		}
+
+
+		/* -- actions -- */
+		/*self.$actions = $('<div>', {class: 'model-actions'});
+		self.$pop.append( self.$actions );
+		
+		if( self.settings.close==true ){
+			self.$actions.append( $('<button>', { type:"button", 'data-action': 'close', 'class': 'action close' }).html( $('<i>', {class: 'icon-remove'}) ) );
+		}*/
 
 		self.$dialog.addClass( self.settings.bg || 'black' );
 	},
@@ -392,7 +402,6 @@ if ( typeof Object.create !== 'function' ) {
 					e.preventDefault();
 					Dialog.load( url, {}, options );
 				});
-
 			// $.data( this, 'dialog', e );
 		});
 	};
@@ -400,7 +409,9 @@ if ( typeof Object.create !== 'function' ) {
 	$.fn.dialog.options = {
 		effect: 5,
 		onOpen: function(){},
-		onClose: function(){}
+		onClose: function(){},
+
+		close: true
 	};
 
 })( jQuery, window, document );

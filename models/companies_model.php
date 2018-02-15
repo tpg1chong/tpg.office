@@ -17,6 +17,7 @@ class Companies_model extends Model
           company.idcompany as company_id
         , company.name as company_name
         , company.address as company_address
+        , company.source_note as note
 
         , company.expats as expatTotal
 
@@ -303,7 +304,7 @@ class Companies_model extends Model
     ";
     public function clientTotal($companyId)
     {
-        return intval( $this->db->count($this->_clientTable, "idcompany=:id", array(
+        return intval( $this->db->count('customer', "customer.idcompany=:id", array(
             ':id'=>$companyId,
         ) ) );
     }
@@ -345,6 +346,22 @@ class Companies_model extends Model
             , description
 
             FROM resource 
+            ORDER BY name ASC
+
+        " );
+    }
+
+
+    /* -- business -- */
+    public function businessList()
+    {
+        
+        return $this->db->select( "
+            SELECT 
+              idbusiness as id
+            , name
+
+            FROM business 
             ORDER BY name ASC
 
         " );

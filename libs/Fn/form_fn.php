@@ -339,4 +339,31 @@ class form_Fn extends Fn{
 		return '<div class="group-btn" data-plugins="radioButtonGroup">'. $li. '</div>';
 	}
 
+
+	public function checkboxList( $data=array(), $options=array() ) {
+		
+		$options = array_merge( array(
+			'checked' => '',
+			'name' => '',
+		), $options);
+		$li = '';
+		foreach ($data as $key => $value) {
+			
+			$checked = $options['checked']==$value['id'] ? ' checked':'';
+			
+
+			$cls = '';
+			if( !empty($value['addClass']) ){
+				$cls .= !empty($cls) ? ' ':'';
+				$cls .= $value['addClass'];
+			}
+
+			$cls = !empty($cls) ? ' class="'.$cls.'"': '';
+			$li.='<li'.$cls.'><label class="checkbox"><input'.$checked.' type="checkbox" name="'.$options['name'].'" value="'.$value['id'].'" autocomplete="off"><span class="mls">'.$value['name'].'</span></label></li>';
+		}
+
+		return '<ul class="ui-checkbox-list">'. $li. '</ul>';
+
+	}
+
 }

@@ -16,7 +16,7 @@ class Companies extends Controller {
         $this->view->render("companies/forum/display");
     }
     public function getTab($action='about') {
-
+        // sleep(3);
         $id = isset($_REQUEST['id']) ?  $_REQUEST['id']: '';
         $item = $this->model->get( $id );
         
@@ -26,6 +26,12 @@ class Companies extends Controller {
         elseif( $action=='client' ){
             $this->view->setData('clientList', $this->model->clientList( $id ) );
         }
+        elseif( $action=='about' ){
+            $this->view->setData('businessList', $this->model->businessList() );
+            $this->view->setData('countryList', $this->model->query('system')->countryList() );
+            $this->view->setData('statusList', $this->model->query('system')->statusList('company') );
+            $this->view->setData('requirementList', $this->model->query('system')->requirementList() );
+        }
 
         $this->view->setPage('path','Forms/companies/tabs');
         $this->view->render( $action, array(
@@ -33,11 +39,16 @@ class Companies extends Controller {
         ));
     }
 
+
+    /* -- active -- */
     public function add() {
         if( empty($this->me) || $this->format!='json' ) $this->error();
 
-        // $this->view->setData('prefixName', $this->model->query('system')->prefixName());
-        $this->view->setData('groups', $this->model->query('companies')->groups() );
+
+        $this->view->setData('businessList', $this->model->businessList() );
+        $this->view->setData('countryList', $this->model->query('system')->countryList() );
+        $this->view->setData('statusList', $this->model->query('system')->statusList('company') );
+        $this->view->setData('requirementList', $this->model->query('system')->requirementList() );
 
         $this->view->setPage('path','Forms/companies');
         $this->view->render("add");
@@ -153,23 +164,16 @@ class Companies extends Controller {
         }
     }
 
-
+    
 
     public function search() {
         
         if( $this->format=='json' ){
-
             $result = $this->model->find();
-            echo json_encode($result);
-            die;
+            echo json_encode($result); die;
         }
 
-
         $this->error();
-        
-
-        // echo $result->getPermit()->update; die;
-        // print_r($result); die;
     }
 
     /**/
@@ -237,7 +241,7 @@ class Companies extends Controller {
     }
 
 
-    /* -- contact */
+    /* -- contact -- */
     public function contactAdd()
     {
 
@@ -250,5 +254,13 @@ class Companies extends Controller {
         $this->view->setData('sourceList', $this->model->sourceList() );
         $this->view->setPage('path','Forms/companies/contact');
         $this->view->render("edit");
+    }
+
+
+    /* -- Example -- */
+    public function __example() {
+         
+        $results = $this->model->clientList( 3531 );
+        print_r($results);
     }
 }

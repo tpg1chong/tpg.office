@@ -120,6 +120,34 @@ var DataLists = {
 				}
 			} );
 		});
+
+
+		self.$elem.find('[data-action-company=create]').click(function(e) {
+			e.preventDefault();
+
+			var href = $(this).data('href');
+			var dataPost = {
+				callback: 1,
+			};
+			
+			Dialog.load( href, dataPost, {
+				onClose: function () {
+					console.log('onClose');
+				},
+				onSubmit: function ( $d ) {
+
+					$form = $d.$pop.find('form');
+					console.log( 'onSubmit' );
+					/*Event.inlineSubmit( $form ).done(function( result ) {
+
+						result.url = '';
+						Event.processForm($form, result);
+
+						self.delProfile();
+					});*/
+				}
+			});
+		});
 		
 
 		/* -- Contact -- */
@@ -137,8 +165,6 @@ var DataLists = {
 				callback: 1,
 				companyId: self.currItem.id,
 			};
-
-
 
 			Dialog.load( href, dataPost, {
 				onClose: function () {
@@ -334,8 +360,6 @@ var DataLists = {
 
 				if( $el.length && val ){
 
-					console.log( val );
-
 					var tagName = $el.prop("tagName");
 					if( tagName=='' ){
 
@@ -376,6 +400,11 @@ var DataLists = {
 			var $html = $(res);
 			self.$content.html( $html );
 
+
+			// resize role="main"
+			var $main = self.$elem.find('[role=main]');
+			$main.height( $(window).height() - $main.offset().top );
+			
 
 			Event.plugins( $html );
 		});
