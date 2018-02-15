@@ -24,9 +24,9 @@ $form   ->field("name")
 
 $form   ->field("bio")
         ->type( 'textarea' )
-        ->label( Translate::Val('Company Profile') )
+        ->label( Translate::Val('Bio') )
         ->addClass('inputtext')
-        ->placeholder('Add address');
+        ->placeholder('Add bio');
 
 $form   ->field("building")
         ->label( Translate::Val('Building') )
