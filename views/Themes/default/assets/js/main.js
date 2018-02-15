@@ -147,9 +147,11 @@ $(function () {
 	
 	$('[title]').tooltip( {
 		reload: 1,
-		bg: 'blue',
+		// bg: 'blue',
 		overflow: {
+			X: '',
 			Y: 'Above'
-		}
+		},
+		pointer: true
 	} );
 });

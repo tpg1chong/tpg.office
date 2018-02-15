@@ -97,7 +97,6 @@ class gCalendar extends Google {
             $arr['items'] = $list;
 
         } else {
-
             $arr['error'] = 404;
             $arr['message'] = 'api disconnect';
             // return redirect()->route('oauthCallback');
@@ -157,6 +156,7 @@ class gCalendar extends Google {
             $color = $this->_colorsEvent[1];
         }
 
+
         $fdata = array(
             'id' => $event->id,
             'summary' => $event->summary,
@@ -169,9 +169,12 @@ class gCalendar extends Google {
             'allday' => $allday,
 
             'creator' => json_decode(json_encode($event->creator), 1),
+            'organizer' => json_decode(json_encode($event->organizer), 1),
 
+            'colorId' => $event->colorId,
             'color' => $color,
         );
+        // print_r($event); die;
 
         if( !$allday ){
             $startTime = strtotime($start);
@@ -232,7 +235,65 @@ class gCalendar extends Google {
 
             try {
                 $event = $service->events->get($calendarId, $eventId);
-                return $event;
+
+                // echo 5555; die;
+                $start = $event->getStart();
+                $start->setDate( date('c', strtotime('2018-02-05')) );
+                $event->setStart( $start );
+
+                echo '<pre>';  //float(11,2) 
+                print_r($event); die;
+                echo '</pre>';
+
+                $data = array(
+                    'id' => $event->id,
+                    'title' => $event->summary,
+                    'location' => $event->location,
+                    'description' => $event->description,
+                    'status' => $event->status,
+
+                    'colorId' => $event->colorId,
+                    'created' => $event->created,
+                    'updated' => $event->updated,
+                );
+
+                $data['creator']['displayName'] = $event->getCreator()->displayName;
+                $data['creator']['email'] = $event->getCreator()->email;
+                $data['creator']['id'] = $event->getCreator()->id;
+                $data['creator']['self'] = $event->getCreator()->self;
+
+                $data['organizer']['displayName'] = $event->getOrganizer()->displayName;
+                $data['organizer']['email'] = $event->getOrganizer()->email;
+                $data['organizer']['id'] = $event->getOrganizer()->id;
+                $data['organizer']['self'] = $event->getOrganizer()->self;
+
+                $start = $event->getStart();
+                $end = $event->getEnd();
+
+                if( !empty($start->date) ){
+                    $data['allday'] = true;
+
+                    $startTime = strtotime($start->date);
+                    $data['startDate'] = date('Y-m-d', $startTime);
+                    $data['startTime'] = '00:00';
+
+                    $endTime = strtotime($end->date);
+                    $data['endDate'] = date('Y-m-d', $endTime);
+                    $data['endTime'] = date('H:i', $endTime);
+                }
+                else{
+                    $data['allday'] = false;
+
+                    $startTime = strtotime($start->dateTime);
+                    $data['startDate'] = date('Y-m-d', $startTime);
+                    $data['startTime'] = date('H:i', $startTime);
+
+                    $endTime = strtotime($end->dateTime);
+                    $data['endDate'] = date('Y-m-d', $endTime);
+                    $data['endTime'] = date('H:i', $endTime);
+                }
+
+                return $data;
             } catch (Exception $e) {
                 return json_decode($e->getMessage(), 1);
             }
@@ -254,6 +315,8 @@ class gCalendar extends Google {
             'allday' => 1,
             'start' => date('Y-m-d'),
             'end' => date('Y-m-d'),
+
+            'colorId' => 1,
 
             'calendarId' => 'primary',
             'timeZone' => $this->_timeZone,
@@ -279,6 +342,7 @@ class gCalendar extends Google {
                 'reminders' => array(
                     'useDefault' => false,
                 ),
+                'colorId' => $options['colorId'],
             );
 
             if( !empty($options['allday']) ){
@@ -323,6 +387,7 @@ class gCalendar extends Google {
             //         ]*/
             //     ],
             // ]);
+
             try {
                 $results = $service->events->insert($options['calendarId'], $event);
             } catch (Exception $e) {
@@ -330,7 +395,6 @@ class gCalendar extends Google {
             }
 
             
-
             if ( empty($results) ) {
                 return ['status' => 'error', 'message' => 'Something went wrong'];
                 // return response()->json(['status' => 'error', 'message' => 'Something went wrong']);
@@ -359,8 +423,37 @@ class gCalendar extends Google {
 
                 $event = $service->events->get($calendarId, $eventId);
 
-                if( !empty($dataPost['title']) ){
-                    $event->setSummary( $dataPost['title'] );
+
+                if( !empty($dataPost['summary']) ){
+                    $event->setSummary( $dataPost['summary'] );
+                }
+
+                if( !empty($dataPost['location']) ){
+                    $event->setLocation( $dataPost['location'] );
+                }
+
+                if( !empty($dataPost['description']) ){
+                    $event->setDescription( $dataPost['description'] );
+                }
+
+                $start = $event->getStart();
+                $end = $event->getEnd();
+
+                if( !empty($dataPost['allday']) ){
+                    $start->setDate( date('Y-m-d', strtotime($dataPost['start'])) );
+                    $end->setDate( date('Y-m-d', strtotime($dataPost['end'])) );
+                }
+                else{
+                    $start->setDateTime( date('c', strtotime($dataPost['start'])) );
+                    $end->setDateTime( date('c', strtotime($dataPost['end'])) );
+                }
+
+                $event->setStart( $start );
+                $event->setEnd( $end );
+
+                
+                if( !empty($dataPost['colorId']) ){
+                    $event->setColorId( $dataPost['colorId'] );
                 }
 
                 $updatedEvent = $service->events->update($calendarId, $event->getId(), $event);
@@ -394,6 +487,5 @@ class gCalendar extends Google {
         else{
             return ['error' => 404];
         } 
-        
     }
 }

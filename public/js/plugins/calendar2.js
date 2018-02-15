@@ -66,11 +66,9 @@ if ( typeof Object.create !== 'function' ) {
 		setElem: function () {
 			var self = this;
 
-
 			$.each( self.$elem.find('[ref]'), function(index, el) {
 				self['$'+$(this).attr('ref')] = $(this);
-			});
-			
+			});	
 		},
 		
 		refresh: function () {
@@ -365,6 +363,38 @@ if ( typeof Object.create !== 'function' ) {
 		Events: function () {
 			var self = this;
 
+			self.$elem.find( '[data-action=refresh]').click(function (e) {
+				e.preventDefault();
+				self.refresh();
+			});
+
+			self.$elem.find( '[data-action=create]').click(function (e) {
+				e.preventDefault();
+				Dialog.load($(this).data('href'), {
+					callback: 1
+				}, {
+					onClose: function () {
+						console.log( 'onClose' );
+					},
+					onSubmit: function ($d) {
+						
+						var $form = $d.$pop.find('form');
+						Event.inlineSubmit( $form ).done(function( result ) {
+
+							result.url = '';
+
+							Event.processForm($form, result);
+
+							console.log( result );
+							if( result.error ) return false;
+
+							// Dialog.close();
+							self.refresh();
+						});
+					}
+				});
+			});
+
 			self.$elem.find( '[data-action-prevnext]').click(function (e) {
 				
 				e.preventDefault();
@@ -387,7 +417,6 @@ if ( typeof Object.create !== 'function' ) {
 					self.date.theDate_mini = newDate;
 					self.displayMini();
 				}
-
 			} );
 
 			self.$elem.find('[data-action=today]').click(function(e){
@@ -460,6 +489,173 @@ if ( typeof Object.create !== 'function' ) {
 					self.date.theDate = today;
 					self.display();
 				}
+			});
+
+
+			// 
+			self.$elem.delegate('.calendarBoxDataEvent [data-id]', 'click', function(event) {
+				var $this = $(this),
+					id = $(this).data('id');
+
+				// self.currId = id;
+				var data = $this.data();
+				self.currData = data;
+
+				var $content = self.$elem.find('[ref=content]');
+				var $arrow = self.$popup.find('.arrow');
+				var permitEdit = data.creator.email==self.options.email;
+				// set Data
+
+				var labels = ['summary', 'location', 'description'];
+				$.each(labels, function(index, val) {
+					self.$popup.find('[name='+ val +']').val( data[val] || '' );
+				});
+
+				// console.log( self.currData );
+				self.$popup.find('[name=allday]').prop('checked', data.allday);
+
+				var startData = new Date( data.start );
+				var startMonth = startData.getMonth()+1; startMonth = startMonth < 10 ? '0'+startMonth:startMonth;
+				var startDate = startData.getDate(); startDate = startDate < 10 ? '0'+startDate:startDate;
+				self.$popup.find('[name=start_date]').val( startData.getFullYear() + '-' + startMonth + '-' + startDate);
+
+				var startTime = '00:00';
+				if( !data.allday ){
+					var startHours = startData.getHours(); startHours = startHours < 10 ? '0'+startHours:startHours;
+					var startMinutes = startData.getMinutes(); startMinutes = startMinutes < 10 ? '0'+startMinutes:startMinutes;
+					startTime = startHours + ":" + startMinutes;
+				}
+				self.$popup.find('[name=start_time]').val( startTime );
+
+				// console.log(  startData.getFullYear() + '-' + startMonth + '-' + startDate );
+				var endData = new Date(data.end);
+				var endMonth = endData.getMonth(); endMonth = endMonth < 10 ? '0'+endMonth:endMonth;
+				var endDate = endData.getDate(); endDate = endDate < 10 ? '0'+endDate:endDate;
+				self.$popup.find('[name=end_date]').val( endData.getFullYear() + '-' + startMonth + '-' + endDate);
+				
+				var endTime = '00:00';
+				if( !data.allday ){
+					var endHours = endData.getHours(); endHours = endHours < 10 ? '0'+endHours:endHours;
+					var endMinutes = endData.getMinutes(); endMinutes = endMinutes < 10 ? '0'+endMinutes:endMinutes;
+					endTime = endHours + ":" + endMinutes;
+				}
+				self.$popup.find('[name=end_time]').val( endTime );
+
+				self.$popup.find('[name=start_time],[name=end_time]').toggleClass('disabled', data.allday).prop('disabled', data.allday);
+
+				self.$popup.find('.btn-close').toggleClass('hidden_elem', permitEdit );
+				self.$popup.find('[data-action-popup=remove],.btn-submit, #colorId_fieldset').toggleClass('hidden_elem', !permitEdit );
+				
+				if( permitEdit ){
+					self.$popup.find('[name=summary]').focus();
+				}
+				else{
+
+				}
+
+				// resize
+				var position = $this.position();
+				var top = position.top-20;
+				var left = position.left + $this.outerWidth() + 8;
+
+				if( (left+self.$popup.outerWidth()+8) > $content.outerWidth() ){
+					self.$popup.addClass('arrow-left');
+					left = position.left - (self.$popup.outerWidth() + 8);
+				}
+				else{
+					self.$popup.removeClass('arrow-left');
+				}
+
+
+				$arrow.css('top', 20);
+
+				var h = top + self.$popup.outerHeight();
+				if( h > $content.outerHeight() ){
+
+					var differ = h-$content.outerHeight();
+					top -= differ + 10;
+
+					// console.log( differ );
+					$arrow.css('top', differ + 30);
+				}
+
+				self.$popup.css({
+					top: top,
+					left: left
+				});
+
+				self.$popup.addClass('open');
+
+			});
+
+			self.$elem.find('[data-action-popup=close]').click(function() {
+				$(this).closest('[ref=popup]').removeClass('open');
+			});;
+
+			self.$elem.find('[data-action-popup=remove]').click(function() {
+
+				if( !self.currData ) return false;
+				var data = self.currData;
+
+				self.$popup.removeClass('open');
+				self.currData = null;
+
+				Dialog.load( Event.URL + 'calendar/deleteEvent/' + data.organizer.email +'/'+ data.id, {}, 
+				{
+					onComplete: function () {
+						var $form = $d.$pop.find('form');
+						console.log( 'onComplete' );
+					},
+					onClose: function () {
+						// console.log( 'onClose' );
+					},
+					onSubmit: function ($d) {
+						
+						var $form = $d.$pop.find('form');
+						Event.inlineSubmit( $form ).done(function( result ) {
+
+							result.url = '';
+							Event.processForm($form, result);
+
+							console.log( result );
+							if( result.error ) return false;
+
+							// Dialog.close();
+							self.refresh();
+						});
+					}
+				});
+				// $(this).closest('[ref=popup]').removeClass('open');
+			});
+
+			self.$elem.find('[data-action-popup=save]').submit(function(e) {
+				e.preventDefault();
+
+				if( !self.currData ) return false;
+				var $form = $(this);
+				var data = self.currData;
+
+				self.$popup.removeClass('open');
+				self.currData = null;
+
+				var formData = new FormData();
+				$.each($form.serializeArray(), function(index, field) {
+					formData.append(field.name, field.value);
+				});
+
+				formData.append('calendarId', data.organizer.email );
+				formData.append('eventId', data.id );
+
+				Event.inlineSubmit( $form, formData ).done(function( result ) {
+
+					result.url = '';
+					Event.processForm($form, result);
+					if( result.error ) return false;
+
+					// Dialog.close();
+					self.refresh();
+				});
+
 			});
 		},
 

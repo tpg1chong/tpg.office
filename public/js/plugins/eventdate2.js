@@ -9,13 +9,13 @@ if ( typeof Object.create !== 'function' ) {
 
 (function( $, window, document, undefined ) {
 
-	var EventDate = {
+	var EventDate2 = {
 		init: function ( options, elem ) {
 			var self = this;
 			self.elem = elem;
 			self.$elem = $( elem );
 			
-			self.options = $.extend({}, $.fn.eventdate.options, options);
+			self.options = $.extend({}, $.fn.eventdate2.options, options);
 
 			self.setElem();
 			self.config();
@@ -163,10 +163,10 @@ if ( typeof Object.create !== 'function' ) {
 		setCalendarStart: function () {
 			var self = this;
 
-			$startDate = $('<input/>',{ type:"text", name: self.options.name[0] || "start_date" });
+			$startDate = $('<input/>',{ class: 'inputtext', 'data-format': "YYYY-MM-DD", type:"date", name: self.options.name[0] || "start_date" });
 			self.$startDate.html( $startDate );
 
-			$startDate.datepicker({
+			/*$startDate.datepicker({
 				style: 'normal',
 				lang: self.options.lang,
 				// format: 'range start',
@@ -193,16 +193,17 @@ if ( typeof Object.create !== 'function' ) {
 						self.setCalendarEnd();
 					}				
 				}
-			});
+			});*/
 		},
 
+		/*https://my.sosius.com/sosius/help/tutorials/changing_browser_date_formatting*/
 		setCalendarEnd: function () {
 			var self = this;
-
-			$endDate = $('<input/>',{ type:"text", name: self.options.name[1] || "end_date" });
+// ="DD MMMM YYYY"
+			$endDate = $('<input/>',{ class: 'inputtext', 'data-format': "YYYY-MM-DD", type:"date", name: self.options.name[1] || "end_date" });
 			self.$endDate.html( $endDate );
 
-			$endDate.datepicker({
+			/*$endDate.datepicker({
 				style: 'normal',
 				lang: self.options.lang,
 				// format: 'range end',
@@ -222,7 +223,7 @@ if ( typeof Object.create !== 'function' ) {
 					}
 
 				}
-			});
+			});*/
 		},
 
 		changeAllday: function () {
@@ -234,15 +235,15 @@ if ( typeof Object.create !== 'function' ) {
 		},
 	};
 
-	$.fn.eventdate = function( options ) {
+	$.fn.eventdate2 = function( options ) {
 		return this.each(function() {
-			var $this = Object.create( EventDate );
+			var $this = Object.create( EventDate2 );
 			$this.init( options, this );
-			$.data( this, 'eventdate', $this );
+			$.data( this, 'eventdate2', $this );
 		});
 	};
 
-	$.fn.eventdate.options = {
+	$.fn.eventdate2.options = {
 		startDate: new Date(),
 		endDate: new Date(),
 		allday: true,

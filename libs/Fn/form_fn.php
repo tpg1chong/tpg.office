@@ -77,9 +77,9 @@ class form_Fn extends Fn{
             ),
         );
 
-        return '<div class="table-address-wrap">'.  $this->_address( $fields ) .'</div>';
+        return '<div class="table-address-wrap">'.  $this->__address( $fields ) .'</div>';
 	}
-	private function _address($data) {
+	private function __address($data) {
 		$str = '';
         foreach ($data as $rows) {
 
@@ -229,6 +229,11 @@ class form_Fn extends Fn{
 		return '<div class="u-table-wrap u-table-birthday">' . $this->uTableCell($fields) .'</div>';
 	}
 
+
+	/*
+		$type: email, phone, social
+		data: 
+	*/
 	public function contacts($type, $data=array(), $options=array()) {
 		
 		$options = array_merge( array(
@@ -265,7 +270,7 @@ class form_Fn extends Fn{
 
 		return $labels;
 	}
-	public function _contact_label_phone($value='') {
+	public function _contact_label_phone() {
 		$labels = array();
 		$labels[] = array('text'=> Translate::Val('Mobile Phone') );
 		$labels[] = array('text'=> Translate::Val('Work Phone') );
@@ -273,7 +278,7 @@ class form_Fn extends Fn{
 		$labels[] = array('text'=> Translate::Val('Other phone') );
 		return $labels;
 	}
-	public function _contact_label_social($value='') {
+	public function _contact_label_social() {
 		$labels = array();
 		$labels = array();
 		$labels[] = array('text'=> Translate::Val('Line ID') );
@@ -298,7 +303,7 @@ class form_Fn extends Fn{
     		  '</div>'
     		:'';
 
-		return '<fieldset class="control-group">'.
+		return '<div class="control-group">'.
 	        '<label class="control-label">'.
 	            '<select name="'.$name.'[name][]" class="labelselect">'.$labelselect.'</select>'.
 	        '</label>'.
@@ -307,8 +312,31 @@ class form_Fn extends Fn{
 	            '<div class="notification"></div>'.
 	            $actions.
 	        '</div>'.
-	    '</fieldset>';
+	    '</div>';
 	}
 
+
+	/* -- radio Button Group */
+	public function radioButtonGroup( $options=array(), $checked='', $name='' ) {
+
+		if( empty($checked) && !empty($options[0]['value']) ){
+			$checked = $options[0]['value'];
+		}
+
+		$li = '';
+		foreach ($options as $key => $value) {
+
+			$_checked = $checked==$value['value'] ? ' checked':'';
+			$label = isset($value['label']) ? $value['label']:$value['value'];
+			$cls = 'btn';
+			if( !empty($_checked) ){
+				$cls .= ' btn-blue active';
+			}
+
+			$li.='<div class="'.$cls.'"><label class="radio hidden_elem"><input'.$_checked.' type="radio" name="'.$name.'" value="'.$value['value'].'" autocomplete="off"></label><span>'.$label.'</span></div>';
+		}
+
+		return '<div class="group-btn" data-plugins="radioButtonGroup">'. $li. '</div>';
+	}
 
 }

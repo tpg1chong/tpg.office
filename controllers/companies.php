@@ -9,27 +9,30 @@ class Companies extends Controller {
     public function index($id=null){
         $this->view->setPage('on', 'companies' );
 
-        // print_r($this->model->query('companies')->groups()); die;
+        
+        $this->view->js( VIEW .'Themes/'.$this->view->getPage('theme').'/assets/js/company.js', true);
 
-        if( !empty($id) ){
-
-        }
-        else{
-
-            if( $this->format=='json' ) {
-                $this->view->setData('results', $this->model->query('companies')->lists() );
-                $render = "companies/lists/json";
-            }
-            else{
-
-                $this->view->setData('groups', $this->model->query('companies')->groups() );
-                $render = "companies/lists/display";
-            }
-
-            $this->view->render($render);
-
-        }
+        // $this->view->setData('groups', $this->model->query('companies')->groups() );
+        $this->view->render("companies/forum/display");
     }
+    public function getTab($action='about') {
+
+        $id = isset($_REQUEST['id']) ?  $_REQUEST['id']: '';
+        $item = $this->model->get( $id );
+        
+        if( $action=='contact' ){
+            $this->view->setData('contactList', $this->model->contactList( $id ) );
+        }
+        elseif( $action=='client' ){
+            $this->view->setData('clientList', $this->model->clientList( $id ) );
+        }
+
+        $this->view->setPage('path','Forms/companies/tabs');
+        $this->view->render( $action, array(
+            'item' => $item
+        ));
+    }
+
     public function add() {
         if( empty($this->me) || $this->format!='json' ) $this->error();
 
@@ -100,7 +103,7 @@ class Companies extends Controller {
 
         if (!empty($_POST)) {
 
-            if ($item['permit']['del']) {
+            if ( !empty($item['permit']['del']) && $item['clientTotal']==0 ) {
                 $this->model->delete($id);
                 $arr['message'] = 'Already Removed.';
             } else {
@@ -148,6 +151,25 @@ class Companies extends Controller {
             $this->view->setPage('path','Forms/companies');
             $this->view->render("dels");
         }
+    }
+
+
+
+    public function search() {
+        
+        if( $this->format=='json' ){
+
+            $result = $this->model->find();
+            echo json_encode($result);
+            die;
+        }
+
+
+        $this->error();
+        
+
+        // echo $result->getPermit()->update; die;
+        // print_r($result); die;
     }
 
     /**/
@@ -212,5 +234,21 @@ class Companies extends Controller {
         );
 
         echo json_encode($results);
+    }
+
+
+    /* -- contact */
+    public function contactAdd()
+    {
+
+        $this->view->setData('sourceList', $this->model->sourceList() );
+        $this->view->setPage('path','Forms/companies/contact');
+        $this->view->render("add");
+    }
+    public function contactEdit()
+    {
+        $this->view->setData('sourceList', $this->model->sourceList() );
+        $this->view->setPage('path','Forms/companies/contact');
+        $this->view->render("edit");
     }
 }

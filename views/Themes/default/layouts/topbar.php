@@ -4,11 +4,11 @@ $this->nav = array();
 
 $this->nav[] = array('id'=>'dashboard','name'=> Translate::val('Dashboard'), 'icon'=>'television','url'=>URL.'dashboard' );
 $this->nav[] = array('id'=>'calendar','name'=> Translate::val('Calendar'), 'icon'=>'calendar-o','url'=>URL.'calendar' );
-$this->nav[] = array('id'=>'customers','name'=> Translate::val('Customers'), 'icon'=>'user-circle-o','url'=>URL.'customers' );
-$this->nav[] = array('id'=>'companies','name'=> Translate::val('Companies'), 'icon'=>'building-o','url'=>URL.'companies' );
+$this->nav[] = array('id'=>'customers','name'=> Translate::val('Client'), 'icon'=>'user-circle-o','url'=>URL.'client' );
+$this->nav[] = array('id'=>'companies','name'=> Translate::val('Company'), 'icon'=>'building-o','url'=>URL.'companies' );
 $this->nav[] = array('id'=>'property','name'=> Translate::val('Property'), 'icon'=>'home','url'=>URL.'property' );
-$this->nav[] = array('id'=>'listing','name'=> Translate::val('Listing'), 'icon'=>'file-text-o','url'=>URL.'property' );
-$this->nav[] = array('id'=>'contacts','name'=> Translate::val('Contacts'), 'icon'=>'address-card-o','url'=>URL.'contacts' );
+// $this->nav[] = array('id'=>'listing','name'=> Translate::val('Listing'), 'icon'=>'file-text-o','url'=>URL.'property' );
+// $this->nav[] = array('id'=>'contacts','name'=> Translate::val('Contacts'), 'icon'=>'address-card-o','url'=>URL.'contacts' );
 $this->nav[] = array('id'=>'reports','name'=> Translate::val('Reports'), 'icon'=>'line-chart','url'=>URL.'reports' );
 
 $pageNav = '';

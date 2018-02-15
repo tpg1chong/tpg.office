@@ -44,7 +44,7 @@ class Model {
     protected function orderby($sort, $dir='DESC'){
         return "ORDER BY ".( $dir=='rand'  ? "rand()": "{$sort} {$dir}" );
     }
-    protected function _cutFirstFieldName($search, $results)  {
+    protected function _cutPrefixField($search, $results)  {
         $data = array();
         foreach ($results as $key => $value) {
             $data[ str_replace($search, '', $key) ] = $value;

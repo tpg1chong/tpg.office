@@ -1,20 +1,5 @@
 <?php
 
-$this->has_invite = isset($_REQUEST['invite']) ? $_REQUEST['invite']: 1;
-if( !empty($this->item) ){
-	$this->has_invite = $this->item['has_invite'];
-}
-
-if( !empty($_REQUEST['obj_type']) && !empty($_REQUEST['obj_id']) && !isset($_REQUEST['invite']) ) $this->has_invite = 0;
-
-
-$startDate = '';
-if( !empty($this->item['start']) ){
-	$startDate = $this->item['start'];
-}
-elseif( isset($_REQUEST['date']) ){
-	$startDate = $_REQUEST['date'];
-}
 
 $form = new Form();
 $form = $form->create()
@@ -27,8 +12,8 @@ $form   ->field("event_title")
         ->addClass('inputtext')
         ->placeholder('Add title')
         ->autocomplete('off')
-        ->attr( !empty($this->item['title']) ? 'autoselect':'autofocus', 1)
-        ->value( !empty($this->item['title']) ? $this->item['title']:'' );
+        ->attr( !empty($_REQUEST['title']) ? 'autoselect':'autofocus', 1)
+        ->value( !empty($_REQUEST['title']) ? $_REQUEST['title']:'' );
 
 
 $form 	->field("event_start")
@@ -36,9 +21,13 @@ $form 	->field("event_start")
 		->text( '<div style="min-height: 100px;" data-plugins="eventdate" data-options="'.$this->fn->stringify( array(
 
 			'lang' => $this->lang->getCode(),
-			'startDate' => $startDate,
-			'endDate' => !empty($this->item['end']) ? $this->item['end']:'',
-			'allday' => !empty($this->item['allday']) ? $this->item['allday']:true,
+			'startDate' => !empty($_REQUEST['startDate']) ? $_REQUEST['startDate']:'',
+			'startTime' => !empty($_REQUEST['startTime']) ? $_REQUEST['startTime']:'',
+
+			'endDate' => !empty($_REQUEST['endDate']) ? $_REQUEST['endDate']:'',
+			'endTime' => !empty($_REQUEST['endTime']) ? $_REQUEST['endTime']:'',
+
+			'allday' => !empty($_REQUEST['allday']) ? $_REQUEST['allday']:true,
 		) ).'"></div>' );
 
 
@@ -47,7 +36,7 @@ $form 	->field("event_location")
 		->addClass('inputtext')
 		->placeholder('Add location')
 		->autocomplete('off')
-		->value( !empty($this->item['location']) ? $this->item['location']:'' );
+		->value( !empty($_REQUEST['location']) ? $_REQUEST['location']:'' );
 
 
 $form 	->field("event_color")
@@ -57,7 +46,7 @@ $form 	->field("event_color")
 		->attr('data-options', Fn::stringify( array('colors'=>$this->colors ) ) )
 		->placeholder('')
 		->autocomplete('off')
-		->value( !empty($this->item['color_code']) ? $this->item['color_code']:'' );
+		->value( !empty($_REQUEST['colorId']) ? $_REQUEST['colorId']:'' );
 
 
 $formDetail = $form->html();
@@ -74,7 +63,7 @@ $form 	->field("event_text")
 		->autocomplete('off')
 		->attr('style', 'min-height:380px')
 		->attr('data-plugins', 'autosize')
-		->value( !empty($this->item['text']) ? $this->item['text']:'' );
+		->value( !empty($_REQUEST['description']) ? $_REQUEST['description']:'' );
 
 $formInvite = $form->html();
 	
@@ -91,14 +80,8 @@ $arr['width'] = 950; //-180  770 - 400 370
 $arr['form'] = '<form method="post" action="'.URL. 'calendar/insertEvent"></form>';
 
 $arr['button'] = '';
-if( !empty($this->item) ){
-    $arr['title']= "Edit event";
-    $arr['hiddenInput'][] = array('name'=>'id','value'=>$this->item['id']);
-
-}
-else{
-    $arr['title']= "Create event";
-}
+$arr['hiddenInput'][] = array('name'=>'id','value'=>$this->id);
+$arr['title']= "Edit event";
 
 $has_callback = '';
 if( isset( $_REQUEST['callback'] ) ){

@@ -1,4 +1,4 @@
-/*          
+/*!          
 		  .o88
           "888
  .oooo.    888  .oo.    ..o88.     ooo. .oo.    .oooo`88
@@ -395,6 +395,7 @@ a.btn-icon:hover{text-decoration:none}
 .model-title .title{font-size:20px;display:inline-block;line-height:30px}
 .model-title .actions{font-size:16px;font-weight:normal}
 .model-body{padding:20px}
+.model-noPadding-body .model-body{padding:0}
 .model-buttons{padding:8px 20px}
 .model-close{position:absolute;top:10px;right:12px;font-size:20px;color:#aaa}
 .model-close:hover{text-decoration:none;color:#333}
@@ -638,6 +639,11 @@ sup.tooltip:hover{cursor:pointer}
 .uiContextualMenu>li>a:hover{text-decoration:none}
 .uiContextualMenu>li.active>a{background-color:#7d63e0;color:#fff}
 .uiContextualMenu>li.divider{background-color:#ddd;margin:2px 6px;height: 1px}
+.uiContextualLayerAbove .uiTooltipX:before{top:100%;
+	border-top-color: #282828;
+    border-bottom: 0;
+    left: 4px;
+}
 /**/
 /* uiMenu */
 /**/
@@ -2145,4 +2151,4 @@ to{opacity:0;margin-top:80px;-webkit-transform:rotate(10deg);transform:rotate(10
 }
 /* .ui-box-input .inputtext:disabled{
 	background-color: transparent !important;
-} */
+} 

@@ -233,6 +233,21 @@ var Dialog = {
 		else if( self.$pop.find(':input[autoselect]').first().length==1 ){
 			self.$pop.find(':input[autoselect]').first().select();
 		}
+
+		self.currHeight = self.$pop.outerHeight();
+		self.$pop.on('click', function(){
+			if( self.currHeight != self.$pop.outerHeight() ){
+				self.currHeight = self.$pop.outerHeight();
+				self.resize();
+			}
+		});
+
+		self.$pop.find(':input').change(function() {
+			if( self.currHeight != self.$pop.outerHeight() ){
+				self.currHeight = self.$pop.outerHeight();
+				self.resize();
+			}
+		});
 	},
 
 	close: function( length ){

@@ -4889,59 +4889,82 @@ if ( typeof Object.create !== 'function' ) {
 			
 			// Event 
 			self.$elem.delegate('.js-add-field', 'click', function() {
-				
-				var $field = $(this).closest('.control-group');
-				var $input = $field.find(':input.js-input').first();
-
-				if( $input.val()=='' ){
-					$input.focus();
-					return false;
-				}
-
-				var next = $field.next();
-				if( next.length!=0 ){
-
-					$input = next.find(':input.js-input').first();
-					if( $input.val()=='' ){
-						$input.focus();
-						return false;
-					}
-				}
-
-				var set = $field.clone();
-				set.find(':input').val('');
-				set.find('select > option:first').prop('selected', true);
-
-				$field.after( set );
-				set.find(':input.js-input').first().focus();
-
-				var first_labelselect = $field.find('.labelselect').find('option:checked').index() + 1;
-
-				if( $field.find('.labelselect').find('option').length <= first_labelselect ){
-					first_labelselect--;
-				}
-				set.find('.labelselect').val( set.find('.labelselect').find('option').eq( first_labelselect ).val() );
+				self.addField( $(this) );
 			});
 
 			self.$elem.delegate('.js-remove-field', 'click', function() {
-				
-				var $field = $(this).closest('.form-field');
-				var $control = $field.find('.control-group');
-				if( $control.length==1 ){
+				self.removeField( $(this) );
+			});
 
-					$control = $control.first()
+			self.$elem.delegate('.labelselect', 'change', function() {
+				$(this).closest('.control-group').find('.js-input').focus();
+			});
 
-					$control.find(':input').val('');
-					$control.find('select').val( $control.find('select').find('option').eq( 0 ).val() );
-					$control.find(':input.js-input').first().focus();
-				}
-				else{
-					$(this).closest('.control-group').remove();
-				}
-				
+			self.$elem.delegate('.js-input', 'keydown', function(e) {
+
+				var $input = $(this);
+				var val = $.trim( $input.val() );
+
+				var keyCode = e.keyCode || e.which;
+				if (keyCode == 9 ) { 
+    				e.preventDefault(); 
+					self.addField( $input );
+  				}
+  				else if( keyCode == 8 && val=='' ){
+  					self.removeField( $input );
+
+  				}
+  				
 			});
 
 		},
+
+		addField: function ( $this ) {
+			var $field = $this.closest('.control-group');
+			var $input = $field.find(':input.js-input').first(),
+				val = $.trim( $input.val() );
+
+			if( val=='' ){ $input.focus(); return false; }
+
+
+			var next = $field.next();
+			if( next.length!=0 ){
+
+				$input = next.find(':input.js-input').first();
+				if( val=='' ){ $input.focus(); return false; }
+			}
+
+			var set = $field.clone();
+			set.find(':input').val('');
+			set.find('select > option:first').prop('selected', true);
+
+			$field.after( set );
+			set.find(':input.js-input').first().focus();
+
+			var first_labelselect = $field.find('.labelselect').find('option:checked').index() + 1;
+
+			if( $field.find('.labelselect').find('option').length <= first_labelselect ){
+				first_labelselect--;
+			}
+			set.find('.labelselect').val( set.find('.labelselect').find('option').eq( first_labelselect ).val() );
+		},
+
+		removeField: function ($this) {
+			var $field = $this.closest('.form-field');
+
+			var $control = $field.find('.control-group');
+			if( $control.length==1 ){
+
+				$control = $control.first()
+
+				$control.find(':input').val('');
+				$control.find('select').val( $control.find('select').find('option').eq( 0 ).val() );
+				$control.find(':input.js-input').first().focus();
+			}
+			else{
+				$this.closest('.control-group').remove();
+			}
+		}
 
 	};
 	$.fn.formcontacts = function( options ) {
@@ -5002,9 +5025,9 @@ if ( typeof Object.create !== 'function' ) {
 
 
 	/**/
-	/* GenderSelector */
+	/* RadioButtonGroup */
 	/**/
-	var GenderSelector = {
+	var RadioButtonGroup = {
 		init: function (options, elem) {
 			var self = this;
 
@@ -5015,19 +5038,17 @@ if ( typeof Object.create !== 'function' ) {
 				var $this = $(this);
 
 				$this.addClass('btn-blue').addClass('active').siblings().removeClass('active').removeClass('btn-blue');
-
 				$this.parent().find(':input[type=checkbox],:input[type=radio]').prop('checked', false)
-
 				$this.find(':input[type=checkbox],:input[type=radio]').prop('checked', true);
 			});
 		},
 
 	}	
-	$.fn.gender_selector = function( options ) {
+	$.fn.radioButtonGroup = function( options ) {
 		return this.each(function() {
-			var $this = Object.create( GenderSelector );
+			var $this = Object.create( RadioButtonGroup );
 			$this.init( options,this );
-			$.data( this, 'gender_selector', $this );
+			$.data( this, 'radioButtonGroup', $this );
 		});
 	};
 	

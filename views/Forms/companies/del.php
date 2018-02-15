@@ -1,22 +1,26 @@
 <?php
 
-$arr['title'] = 'Confirm deletion of Data.';
+$arr['title'] = 'Delete company';
 
 $next = isset($_REQUEST['next']) ? '?next='.$_REQUEST['next']:'';
 
-if( $this->item['permit']['del'] ){
+if( !empty($this->item['permit']['del']) && $this->item['clientTotal']==0 ){
 	
-	$arr['form'] = '<form class="js-submit-form" action="'.URL.'companies/del'.$next.'"></form>';
+	$arr['form'] = '<form action="'.URL.'companies/del'.$next.'"></form>';
 	$arr['hiddenInput'][] = array('name'=>'id','value'=>$this->item['id']);
-	$arr['body'] = "You want to delete Company Name <span class=\"fwb\">{$this->item['name']}</span>?";
+
+	$arr['body'] = '<div>Choose Company Name to delete:</div>'.
+		'<ul>'.
+			'<li><label class="checkbox"><input type="checkbox" name="confirm" value="'.$this->item['id'].'"><strong class="mls">'.$this->item['name'].'</strong></label></li>'.
+		'<ul>';
 	
-	$arr['button'] = '<button type="submit" class="btn btn-danger btn-submit"><span class="btn-text">ลบ</span></button>';
-	$arr['bottom_msg'] = '<a class="btn" role="dialog-close"><span class="btn-text">'.$this->lang->translate('Cancel').'</span></a>';
+	$arr['button'] = '<button type="submit" role="submit" class="btn btn-danger btn-submit"><span class="btn-text">'.Translate::val('Delete').'</span></button>';
+	$arr['bottom_msg'] = '<a class="btn" role="dialog-close"><span class="btn-text">'.Translate::val('Cancel').'</span></a>';
 }
 else{
 
-	$arr['body'] = "You can not delete Company Name <span class=\"fwb\">\"{$this->item['name']}\"</span>";	
-	$arr['button'] = '<a href="#" class="btn btn-cancel" role="dialog-close"><span class="btn-text">'.$this->lang->translate('Close').'</span></a>';
+	$arr['body'] = "You can't delete Company Name <span class=\"fwb\">\"{$this->item['name']}\"</span>";	
+	$arr['button'] = '<a href="#" class="btn btn-cancel" role="dialog-close"><span class="btn-text">'.Translate::val('Close').'</span></a>';
 }
 
 

@@ -13,14 +13,21 @@ class Calendar extends Controller {
 		if ( isset($_SESSION['access_token']) ){
 			$timestamp = intval($_SESSION['access_token']['created']);
 			$difference = time() - $timestamp;
+
 			if($difference > 3600){
 				$this->_autoLoginWithGoogle();
-				die;
 				// https://developers.google.com/identity/protocols/OAuth2ForDevices
 			}
+			else{
+				$this->view->setData('colors', $this->model->query('system')->listEventColors() );
+				$this->view->render("calendar/display");
+			}
+		}
+		else{
+			$this->_autoLoginWithGoogle();
 		}
 
-		$this->view->render("calendar/display");
+		
 	}
 
 	public function __test(){
@@ -28,35 +35,6 @@ class Calendar extends Controller {
 		Session::init();
 		$google = new Google();
 		$client = $google->client;
-
-		// if( !$client->getAccessToken() ){
-		
-		// 	$client->setLoginHint($this->me['user_email']);
-		// 	// $client->setApprovalPrompt('force');
-		// 	$client->isAccessTokenExpired(true);
-		// 	$client->getRefreshToken();
-
-		// 	$client->setScopes( $google->_scopes );
-		// 	$client->setRedirectUri( URL . 'auth/google_oauth2/' );
-		// 	$getAuthUrl = $client->createAuthUrl();
-
-		// 	echo $getAuthUrl; die;
-		// 	#
-		// 	Session::set( 'google_redirect_uri', URL.'calendar/' ); 
-		// 	header('Location: ' . filter_var($getAuthUrl, FILTER_SANITIZE_URL));
-		// 	die;
-
-		// 	// $isExpired = $client->isAccessTokenExpired(); // true (bool Returns True if the access_token is expired.)
-  //   		// $refresh = $client->getRefreshToken(); //null because not gahe refresh token
-
-  //   		/*$client->getGoogleClient()->setAccessType("offline"); //your recomendation
-  //   		$client->getGoogleClient()->setApprovalPrompt("force"); //your recomendation*/
-
-  //   		/*$isAgainExpired = $client->isAccessTokenExpired(); // still true (expired)
-
-  //   		if ($request->request->get('parentId') != null) {
-  //   		}*/
-		// }
 
 		// die;
 		// print_r($userProfile); die;
@@ -111,10 +89,104 @@ class Calendar extends Controller {
 	{
 		if( empty($this->me) || $this->format!='json' ) $this->error();
 
+		// $google = new Google();
         $this->view->setData('colors', $this->model->query('system')->listEventColors() );
 
         $this->view->setPage('path', 'Forms/events');
 		$this->view->render("add");
+	}
+
+	public function get($eventId=null)
+	{
+		$calendarId = 'thaipropertyguide.com_i43s582pm9ttup8lcad2la4o2c@group.calendar.google.com';
+		$google = new Google();
+		$gCalendar = $google->app('calendar');
+
+		$event = $gCalendar->getEvent($calendarId, $eventId);
+		// print_r( $event ); die;
+
+		echo json_encode($event);
+	}
+	// public function edit($eventId=null)
+	// {
+	// 	// $calendarId = 'thaipropertyguide.com_i43s582pm9ttup8lcad2la4o2c@group.calendar.google.com';
+
+	// 	/*$item = 
+	// 	print_r($item); die;*/
+		
+	// 	$this->view->setData('id', $eventId );
+	// 	$this->view->setData('colors', $this->model->query('system')->listEventColors() );
+	// 	$this->view->setPage('path', 'Forms/events');
+	// 	$this->view->render("edit");
+	// }
+	public function updateEvent()
+	{
+		if( empty($_POST) ) $this->error();
+
+		try {
+            $form = new Form();
+            $form   ->post('summary')->val('is_empty')
+                    ->post('description')
+            		->post('location')
+                    ->post('colorId');
+
+            $form->submit();
+            $postData = $form->fetch();
+
+            $startTime = !empty($_POST['start_time']) ? $_POST['start_time'].':00' : '00:00:00';
+        	$endTime = !empty($_POST['end_time']) ? $_POST['end_time'].':00' : '00:00:00';
+
+            $postData['start'] = $_POST['start_date'].' '.$startTime;
+            $postData['end'] = $_POST['end_date'].' '.$endTime;
+            $postData['allday'] = isset($_POST['allday']) ? 1 : 0;
+
+            $calendarId = isset($_POST['calendarId']) ? $_POST['calendarId']:'';
+			$eventId = isset($_POST['eventId']) ? $_POST['eventId']:'';
+
+            if( empty($arr['error']) ){
+            	$google = new Google();
+				$gCalendar = $google->app('calendar');
+
+                $gCalendar->updateEvent($calendarId, $eventId, $postData );
+                
+                $arr['message'] = 'Event updated';
+                // $arr['data'] = $postData;
+            }
+
+        } catch (Exception $e) {
+            $arr['error'] = $this->_getError($e->getMessage());
+        }
+
+		echo json_encode($arr);
+	}
+	public function deleteEvent($calendarId=null, $eventId=null) 
+	{
+
+		if( !empty($_POST) ){
+
+			$calendarId = isset($_POST['calendarId']) ? $_POST['calendarId']:'';
+			$eventId = isset($_POST['eventId']) ? $_POST['eventId']:'';
+			if( !empty($calendarId) && !empty($eventId) ){
+				$google = new Google();
+				$gCalendar = $google->app('calendar');
+
+				$gCalendar->deleteEvent($calendarId, $eventId);
+				$arr['message'] = 'Event deleted';
+			}
+			else{
+				$arr['message'] = 'Error';
+			}
+
+			echo json_encode($arr);
+		}
+		else{
+			$this->view->setPage('path', 'Forms/events');
+			$this->view->render("deleteEvent", array(
+				'calendarId' => $calendarId,
+				'eventId' => $eventId
+			) );
+		}
+		
 	}
 
 
@@ -124,11 +196,11 @@ class Calendar extends Controller {
 		$gCalendar = $google->app('calendar');
 
 
+
 		$results = $gCalendar->listColors();
 		print_r($results); die;
 	}
-	public function _insert() {
-		
+	public function __sample() {
 
 		Session::init();
 		$google = new Google();
@@ -145,7 +217,7 @@ class Calendar extends Controller {
 			'end' => date('Y-m-d 00:00:00'),
 		) );*/
 
-		$eventId = 'v6eotq8ule8l0aakhfqros3pho';
+		$eventId = 'goji9mmc5o2de9o15bsitj8vbs';
 
 		// get
 		$results = $gCalendar->getEvent($calendarId, $eventId);
@@ -204,15 +276,12 @@ class Calendar extends Controller {
                 	'description' => $postData['event_text'],
 
                 	'colorId' => $postData['event_color'],
-
                 	
                 	'allday' => $postData['event_allday'],
                 	'start' => $postData['event_start'],
                 	'end' => $postData['event_end'],
 
-
                 	'calendarId' => $calendarId,
-
                 ) );
                 
                 $arr['message'] = 'Saved';

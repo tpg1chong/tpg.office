@@ -127,6 +127,7 @@ class Theme extends View{
                 ->js('plugins/dialog')
                 ->js('plugins/default')
                 ->js('jquery/jquery');
+                // 
 
     }
     public function _render($name, $options=array()) {
