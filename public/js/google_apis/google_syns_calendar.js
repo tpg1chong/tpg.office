@@ -28,7 +28,6 @@ var GoogleSynsCalendar = {
 		self.options = $.extend( {}, googleSynsCalendarOptions, options );
 
 		gapi.load("client:auth", function() {
-	   	 	self. ();
 	  	});
 
         // self.handleClientLoad();

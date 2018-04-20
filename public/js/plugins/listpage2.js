@@ -653,7 +653,6 @@ if ( typeof Object.create !== 'function' ) {
 					// self.selection(false, 'all');
 				}
 			});
-
 		},
 
 		print: function ($form) {

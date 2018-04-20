@@ -164,9 +164,7 @@ class Controller {
 
         // ทดสอบระบบ Demo // Auto Login
         if( empty($me) && $this->format=='html' && $this->pathName!='auth' && !isset($_REQUEST['connection']) ){
-
-            $this->_autoLoginWithGoogle();
-            die;
+            // $this->_autoLoginWithGoogle();die;
         }
 
         if( !empty($me) ){

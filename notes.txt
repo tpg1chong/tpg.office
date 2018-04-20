@@ -4,6 +4,8 @@ v8RNoOCtSjs&W7pH)(
 
 https://www.apple.com/th/macbook-pro/specs-2015/
 https://javascript-minifier.com/
+http://jsbeautifier.org/
+
 
 - mpmf
 - sume 
